@@ -23,10 +23,11 @@
 }
 
 .heroCover{
-    background: rgba(0,0,0,0.48);
+    position: relative;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.6), rgba(0,0,0,0.95));
     height: 100%;
     width:100%;
-    padding-left: 15vw;
+    padding-left: 14vw;
     padding-bottom: 15vh;
     display: flex;
     flex-direction: column;
@@ -34,34 +35,130 @@
     
 }
 
+.floater{
+/*    background: pink;*/
+    position: absolute;
+    height: 120px;
+/*    width: 30px;*/
+    right:60px;
+    top:50%;
+    transform: translateY(-50%);
+    color:#fff;
+    
+}
+
+.floater ul{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.floater li{
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.floater li.active{
+    color:dimgray;
+}
+
+.heroCoverBox{
+/*    background: grey;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 48vh;
+    width: 40vw;
+}
+
 .coverTop>h1{
-    font-size: 40px;
+    font-size: 47px;
     color: #fff;
+}
+
+.coverTop div{
+/*    background: blue;*/
+    height: 40px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.coverTop i{
+    font-size: 40px;
+    color:yellow;
 }
 
 .coverTop p{
+    font-size: 22px;
     color: #fff;
 }
 
-.heroCover>p{
+.heroCoverBox>p{
     color: #fff;
     font-size: 19px;
+    margin: 20px 0 45px 0;
 }
+
+.heroCoverBox>button{
+    background: red;
+    width: 200px;
+    height: 58px;
+    border: none;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.heroCoverBox>button:hover{
+    background-color: crimson;
+/*    transform: scale(1.03);*/
+}
+
+.heroCoverBox>button>i{
+    margin-left: 5px;
+}
+
+
+/*SECOND SECTION*/
 
 .secondSection{
     background: black;
     color:#fff;
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
-    padding: 6vh 10vw;
+    padding: 9vh 8vw;
 }
 
 .recentContainer{
-    background: yellow;
-    height: 55vh;
+/*    background: yellow;*/
+    min-height: 55vh;
     width: 100%;
+    margin-bottom: 100px;
+}
+
+.recentHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.recentHeader>h1{
+    font-size: 19px;
 }
 
 .cardsContainer{
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 38px;
 }

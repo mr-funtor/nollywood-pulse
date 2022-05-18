@@ -1,21 +1,22 @@
 .navbar{
-    background: pink;
+    background: linear-gradient(to bottom,#000, rgba(0,0,0,0.6),#0000);
     position: fixed;
     top:0;
     left: 0;
     width:100%;
-    height: 9vh;
+    height: 12vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 35px;
+    padding: 0px 40px;
     z-index: 5;
-    opacity: 0.5;
-    
+/*    opacity: 0.5;*/
+    color: #fff;
 }
 
+
 .navbar>ul{
-    background: blue;
+/*    background: blue;*/
     width: 100px;
     display: flex;
     justify-content: space-between;

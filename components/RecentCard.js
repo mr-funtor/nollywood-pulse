@@ -1,12 +1,31 @@
 import Image from 'next/image';
-import heroPic from '../assets/images/40.png';
+import heroPic from '../assets/images/oct.jpg';
 import styles from '../styles/RecentCard.module.css';
 
 function recentCards(){
     return(
-        <div className={styles.singleCard}>
+        <article className={styles.singleCard}>
+            <div className={styles.imageContainer}>
+                <Image className={styles.theImage} src={heroPic}
+        alt="a picture for the movie" layout="fill"/>
+            </div>
         
-        </div>
+            <div className={styles.ratingsBox}>
+                <i>U</i>
+                <i>+</i>
+            </div>
+            
+      
+            <div className={styles.overlay}>
+                <footer className={styles.overlayFooter}>
+                    <p>October 1</p>
+                    <div>
+                        <i>****</i>
+                        <p>4.5</p>
+                    </div>
+                </footer>
+            </div>
+        </article>
     )
 }
 
