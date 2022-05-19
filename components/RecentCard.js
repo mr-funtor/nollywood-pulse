@@ -11,7 +11,7 @@ function recentCards(){
             </div>
         
             <div className={styles.ratingsBox}>
-                <i>U</i>
+                
                 <i>+</i>
             </div>
             
@@ -23,6 +23,7 @@ function recentCards(){
                         <i>****</i>
                         <p>4.5</p>
                     </div>
+                    <button>Give Rating/Review</button>
                 </footer>
             </div>
         </article>

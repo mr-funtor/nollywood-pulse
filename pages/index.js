@@ -48,7 +48,7 @@ export default function Home() {
         <section className={styles.recentContainer}>
             <div className={styles.recentHeader}>
                 <h1>Recent Movies</h1>
-                <p>See All</p>
+                <p>See More</p>
             </div>
             
             <div className={styles.cardsContainer}>
@@ -59,10 +59,10 @@ export default function Home() {
             </div>
         </section>
       
-        <section className={styles.recentContainer}>
+        <section className={styles.recentContainer2}>
             <div className={styles.recentHeader}>
                 <h1>Recent Reviews</h1>
-                <p>See All</p>
+                <p>See More</p>
             </div>
             
             <div className={styles.cardsContainer}>

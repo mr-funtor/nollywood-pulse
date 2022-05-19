@@ -14,14 +14,18 @@
     color: #fff;
 }
 
+.navbar>h3{
+    cursor: pointer;
+}
 
 .navbar>ul{
 /*    background: blue;*/
-    width: 100px;
+    width: 90px;
     display: flex;
     justify-content: space-between;
 }
 
 .navbar>ul>li{
     list-style: none;
+    cursor: pointer;
 }

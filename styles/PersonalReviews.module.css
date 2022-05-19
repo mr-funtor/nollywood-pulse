@@ -1,0 +1,37 @@
+.pageContainer{
+    
+    background: #000;
+    min-height: 100vh;
+    color: #fff;
+}
+
+.pageContainer>section,
+#pageSection{
+    padding-top: 15vh;
+/*    background: pink;*/
+    width:55%;
+    min-height: 100vh;
+    margin: 0 auto;
+    
+}
+
+#pageSection{
+    width:65%;
+/*    background: blue;*/
+}
+
+
+
+.pageContainer>section>h1{
+    
+    font-size: 50px;
+    text-align: center;
+}
+
+
+.reviewsContainer{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

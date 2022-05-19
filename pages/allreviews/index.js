@@ -1,5 +1,10 @@
 function AllReviewsPage(){
-    return<h2>hutnt</h2>
+    return(
+        <section>
+       
+        </section>
+    
+    )
 }
 
 export default AllReviewsPage;
