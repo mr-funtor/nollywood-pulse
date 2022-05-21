@@ -1,0 +1,20 @@
+.modal{
+    background: #000;
+    position: fixed;
+    top:0;
+    left: 0;
+    height: 100vh;
+    width:100%;
+    z-index: 15;
+}
+
+.modal>button{
+    position: absolute;
+}
+
+.modal>div{
+    background: pink;
+    max-width: 40vw;
+    min-width: 400px;
+    height: 30vh;
+}

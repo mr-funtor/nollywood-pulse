@@ -7,22 +7,25 @@ function ReviewCard(){
         <article className={styles.singleCard}>
             <header className={styles.singleCardHeader}>
                 
-                <div className={styles.imageContainer}>
-                            <Image className={styles.theImage} src={heroPic}
-                    alt="a picture for the movie" layout="fill"/>
+                <div className={styles.personInfo}>
+                    <div className={styles.imageContainer}>
+                                <Image className={styles.theImage} src={heroPic}
+                        alt="a picture for the movie" layout="fill"/>
+
+
+                    </div>
+                
+                    <div className={styles.namebox}>
+                       <p>Review by</p> 
+                       <p>Tosin Ojo</p>
+                        <i>****</i>
+                    </div>
                 </div>
                 
-                <h3>Wedding Party</h3>
-                
-                <div className={styles.namebox}>
-                   <p>by</p> 
-                   <p>Tosin Ojo</p> 
-                        
+                <div>
+                    <h3 className={styles.movieTitle}>Wedding Party</h3>
                 </div>
-        
-                <i>****</i>
-                
-                
+               
             </header>
         
             <footer>

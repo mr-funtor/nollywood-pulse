@@ -16,6 +16,12 @@
 
 .navbar>h3{
     cursor: pointer;
+    
+}
+
+.navbar>h3 a{
+    text-decoration: none;
+    color: #fff;
 }
 
 .navbar>ul{

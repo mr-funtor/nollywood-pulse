@@ -1,11 +1,11 @@
 import styles from '../../styles/PersonalReviews.module.css';
 import RecentCard from '../../components/RecentCard';
 
-function WatchListPage(){
+function allMoviesPage(){
     return(
         <section className={styles.pageContainer}>
             <section id={styles.pageSection}>
-                <h1>Your Watchlist</h1>
+                <h1>Movies To Review</h1>
                 
                 <div className={styles.reviewsContainer}>
                     <RecentCard />
@@ -21,4 +21,4 @@ function WatchListPage(){
     )
 }
 
-export default WatchListPage;
+export default allMoviesPage;

@@ -1,5 +1,5 @@
-import styles from '../../styles/PersonalReviews.module.css';
-import ReviewCard from '../../components/ReviewCard';
+import styles from '../styles/PersonalReviews.module.css';
+import ReviewCard from '../components/ReviewCard';
 
 function PersonalReviewsPage(){
     return(

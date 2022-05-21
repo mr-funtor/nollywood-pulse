@@ -1,13 +1,24 @@
+import Link from 'next/link';
 import styles from '../styles/Navbar.module.css';
+import {useDispatch} from 'react-redux';
+import {openSide} from '../features/sideClose';
+
 
 function Navbar(){
+    const dispatch= useDispatch();
+    
     return(
     <nav className={styles.navbar}>
-        <h3>Nollywood Pulse</h3>    
+        <h3>
+            <Link href="/">
+                <a>Nollywood Pulse</a>
+            </Link>
+        </h3>    
             
         <ul>
             <li><i>x</i></li>    
-            <li><i>0</i></li> 
+            <li onClick={()=>{
+        dispatch(openSide())}}><i >0</i></li> 
         </ul>
         
     </nav>

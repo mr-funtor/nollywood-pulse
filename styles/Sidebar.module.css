@@ -2,13 +2,61 @@
     position: fixed;
     right: 0px;
     top: 0px;
-    background: pink;
-    height: 110vh;
-    width:350px;
+    background: #000;
+    height: 100vh;
+    width:280px;
     z-index: 9;
     transition: all 0.2s ease-in-out;
+    color:white;
+/*    border-left: 1px solid #fff; */
+    box-shadow: -0.9px 0px 4px #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebar a:not(.active){
+    text-decoration: none;
+    color:#fff;
 }
 
 .stayHidden{
    right: -350px; 
+}
+
+.show{
+    right: 0px; 
+}
+
+.sidebar>button{
+    position: absolute;
+    top:20px;
+    right:40px;
+}
+
+.categoriesBox{
+/*    background: pink;*/
+    height: 80%;
+    margin: auto 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 50px;
+}
+
+.categoriesBox>section>h3{
+    margin-bottom: 15px;
+}
+
+.categoriesBox>section>div{
+     margin-bottom: 2px;
+}
+
+.categoriesBox>section>div>i{
+    margin-right: 6px;
+}
+
+.active{
+    text-decoration: none;
+    color:darkgray;
 }

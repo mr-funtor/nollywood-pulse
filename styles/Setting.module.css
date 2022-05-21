@@ -1,0 +1,56 @@
+.pageContainer{
+/*    background: pink;*/
+    max-width: 35vw;
+    min-width: 300px;;
+    height: 100vh;
+    margin: 0 auto;
+    padding-top: 15vh;
+    color: #fff;
+}
+
+.pageContainer>h1{
+    font-size: 40px;
+    text-align: center;
+}
+
+.pageContainer>form{
+    margin-top: 10vh;;
+/*    background: pink;*/
+    height: 40%;
+}
+
+.pageContainer>form label{
+    display: block;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.pageContainer>form input{
+    height: 30px;
+    width:100%;
+    background: none;
+    border: 1px solid white;
+    margin-bottom: 25px;
+    color: grey;
+}
+
+
+.pageContainer>form>div:last-child{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.pageContainer>form>div:last-child button{
+    background: none;
+    height: 40px;
+    width:100px;
+    border: 1px solid #fff;
+    border-radius: 50px;
+    color:#fff;
+}
+
+.pageContainer>form>div:last-child button:last-child{
+    background: #fff;
+    color:#000;
+}

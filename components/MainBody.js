@@ -3,19 +3,12 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import heroPic from '../assets/images/40.png'
 import tempBlood from '../assets/images/blood.jpg'
-import RecentCard from '../components/RecentCard'
-import ReviewCard from '../components/ReviewCard';
-import Modal from "../components/Modal";
-import {useSelector} from 'react-redux';
-
+import RecentCard from './RecentCard'
+import ReviewCard from './ReviewCard'
 
 export default function Home() {
-    const modalState= useSelector((state)=>state.modal)
-    
   return (
     <section className={styles.heroSection}>
-      {modalState && <Modal/>}
-      
       <div className={styles.imageContainer}>
         <Image className={styles.theImage} placeholder="blur"  src={tempBlood} alt="a picture for the movie" layout="fill"/>
       </div>
