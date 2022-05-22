@@ -1,8 +1,7 @@
 import '../styles/globals.css';
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
-
-
+import Modal from "../components/Modal";
 
 //redux
 import {configureStore} from '@reduxjs/toolkit';
@@ -17,17 +16,13 @@ const store=configureStore({
     }
 })
 
-
-
 function MyApp({ Component, pageProps }) {
-
-    
   return( 
     <>
       <Provider store={store}>
           <Navbar />
           <Sidebar/>
-          
+            <Modal/>    
           <Component {...pageProps} />
       </Provider >
     </>

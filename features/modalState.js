@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import styles from '../styles/Sidebar.module.css';
 
-const initialStateValue=true;
+const initialStateValue=false;
 
 export const modalSlice= createSlice({
     name:'modal',
@@ -13,6 +13,7 @@ export const modalSlice= createSlice({
             return state= true;
         },
         closeModal:(state,action)=>{
+            console.log(state)
            return state= false;
         },
      },

@@ -1,8 +1,12 @@
 import Image from 'next/image';
 import heroPic from '../assets/images/oct.jpg';
 import styles from '../styles/RecentCard.module.css';
+import {useDispatch} from 'react-redux';
+import {openModal} from '../features/modalState'
 
 function recentCards(){
+    const dispatch =useDispatch();
+    
     return(
         <article className={styles.singleCard}>
             <div className={styles.imageContainer}>
@@ -12,7 +16,7 @@ function recentCards(){
         
             <div className={styles.ratingsBox}>
                 
-                <i>+</i>
+                <i >+</i>
             </div>
             
       
@@ -23,7 +27,7 @@ function recentCards(){
                         <i>****</i>
                         <p>4.5</p>
                     </div>
-                    <button>Give Rating/Review</button>
+                    <button onClick={()=>dispatch(openModal())}>Give Rating/Review</button>
                 </footer>
             </div>
         </article>

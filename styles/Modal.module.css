@@ -6,15 +6,65 @@
     height: 100vh;
     width:100%;
     z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal>button{
     position: absolute;
+    top:20px;
+    right:40px;
 }
 
 .modal>div{
-    background: pink;
-    max-width: 40vw;
-    min-width: 400px;
+/*    background: pink;*/
+    max-width: 700px;
+    min-width: 350px;
     height: 30vh;
 }
+
+.modal>div>h1{
+    color: yellow;
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.modal>div>textarea{
+    height: 60%;
+    width: 100%;
+    resize: none;
+    background: none;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    color: #fff;
+}
+
+
+.modal>div>footer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal>div>footer>button{
+    height: 40px;
+    width:100px;
+    border: 1px solid #fff;
+    border-radius: 50px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.modal>div>footer>button.inactive{
+    pointer-events: none;
+    background-color: lightgray;
+    color:gray;
+}
+
+
+
+
+

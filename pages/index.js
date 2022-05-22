@@ -11,10 +11,10 @@ import {useSelector} from 'react-redux';
 
 export default function Home() {
     const modalState= useSelector((state)=>state.modal)
-    
+//    {modalState && <Modal/>}
   return (
     <section className={styles.heroSection}>
-      {modalState && <Modal/>}
+      
       
       <div className={styles.imageContainer}>
         <Image className={styles.theImage} placeholder="blur"  src={tempBlood} alt="a picture for the movie" layout="fill"/>
@@ -36,7 +36,7 @@ export default function Home() {
           ndnlkn sndnl dnlfdnlsjdouf dkljlfdjld dljlfjdojl jdojojfodjf
           ndnlkn sndnl dnlfdnls</p>
 
-            <button>Watch Trailer <i>></i></button>
+            <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank"><button>Watch Trailer <i>></i></button></a>
         </div>
       
         <div className={styles.floater}>
