@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Image from 'next/image';
 import styles from '../styles/Home.module.css'
 import heroPic from '../assets/images/40.png'
 import tempBlood from '../assets/images/blood.jpg'
@@ -7,6 +7,7 @@ import RecentCard from '../components/RecentCard'
 import ReviewCard from '../components/ReviewCard';
 import Modal from "../components/Modal";
 import {useSelector} from 'react-redux';
+
 
 
 export default function Home() {
@@ -59,6 +60,7 @@ export default function Home() {
             </div>
             
             <div className={styles.cardsContainer}>
+      
                 <RecentCard />
                 <RecentCard />
                 <RecentCard />

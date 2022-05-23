@@ -1,13 +1,15 @@
 .singleCard{
-    background: #f8f8ff;
+/*    background: #f8f8ff;*/
+/*    background-color:#333;*/
     height: 208px;
     width:380px;
     padding: 22px 28px;
     border-radius: 10px;
-    color:black;
+    color:#fff;
     margin-bottom: 50px;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+    border: 1px solid #fff;
 }
 
 .singleCard:hover{

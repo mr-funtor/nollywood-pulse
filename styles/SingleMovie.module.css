@@ -1,0 +1,120 @@
+.topSection{
+    background: pink;
+    position: relative;
+    height: 45vh;
+}
+
+.imageContainer{
+    position: absolute;
+    height: 100%;
+    width:100%;
+}
+
+.theImage{
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+
+.heroCover{
+    position: relative;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.45), rgba(0,0,0,0.9));
+    height: 100%;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+}
+
+.heroCover>h1{
+    font-size: 100px;
+    color:yellow;
+}
+
+.movieBody{
+/*    background: pink;*/
+    min-height: 100vh;
+    padding: 5vh 23.5vw;
+    color: #fff;
+}
+
+.movieBodyTop>h1{
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.actionArea{
+    width:75%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.actionArea>a{
+    text-decoration: none;
+}
+
+
+.actionArea>a>button{
+    background: red;
+    width: 180px;
+    height: 48px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.actionArea>a>button:hover{
+    background-color: crimson;
+}
+
+.actionArea>b{
+    cursor: pointer;
+}
+
+.actionArea>i{
+    background: rgba(222,222,222,0.35);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.actionArea>i:hover{
+    background: rgba(222,222,222,0.6);
+}
+
+.synopsis{
+    margin: 50px 0;
+}
+
+.synopsis>h1,
+.reviewContainer>h1{
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.reviewContainer{
+    min-height: 50vh;
+}
+
+.reviewContainer>div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between
+}
+

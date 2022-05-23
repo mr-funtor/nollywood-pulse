@@ -19,9 +19,9 @@
 
 .modal>div{
 /*    background: pink;*/
-    max-width: 700px;
+    width: 35vw;
     min-width: 350px;
-    height: 30vh;
+    height: 40vh;
 }
 
 .modal>div>h1{

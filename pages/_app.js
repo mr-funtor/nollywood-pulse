@@ -16,7 +16,8 @@ const store=configureStore({
     }
 })
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {    
+    
   return( 
     <>
       <Provider store={store}>
