@@ -28,10 +28,11 @@
     right: 0px; 
 }
 
-.sidebar>button{
+.sidebar>i{
     position: absolute;
-    top:20px;
+    top:25px;
     right:40px;
+    cursor: pointer;
 }
 
 .categoriesBox{

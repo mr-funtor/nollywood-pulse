@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import Head from 'next/head'
 import Image from 'next/image';
 import styles from '../styles/Home.module.css'
@@ -6,13 +7,29 @@ import tempBlood from '../assets/images/blood.jpg'
 import RecentCard from '../components/RecentCard'
 import ReviewCard from '../components/ReviewCard';
 import Modal from "../components/Modal";
-import {useSelector} from 'react-redux';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserXmark,
+    faCaretRight,
+    faStar
+}from "@fortawesome/free-solid-svg-icons";
+import Link from 'next/link';
 
+//redux
+import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {switcher} from '../features/navState';
 
 
 export default function Home() {
+    const dispatch= useDispatch();
     const modalState= useSelector((state)=>state.modal)
-//    {modalState && <Modal/>}
+
+//this changes the color of the nav items in the side bar
+    useEffect(()=>{
+        dispatch(switcher('Home'))
+    },[])    
+    
   return (
     <section className={styles.heroSection}>
       
@@ -26,7 +43,12 @@ export default function Home() {
             <div className={styles.coverTop}>
                 <h1>Blood Sisters</h1>
                 <div>
-                    <i>*****</i>
+                    <i>
+                        <FontAwesomeIcon icon={faStar} />
+      <FontAwesomeIcon icon={faStar} />
+      <FontAwesomeIcon icon={faStar} />
+      <FontAwesomeIcon icon={faStar} />
+                    </i>
                     <p><span>3.4</span>/5</p>
                 </div>
             </div>
@@ -37,7 +59,9 @@ export default function Home() {
           ndnlkn sndnl dnlfdnlsjdouf dkljlfdjld dljlfjdojl jdojojfodjf
           ndnlkn sndnl dnlfdnls</p>
 
-            <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank"><button>Watch Trailer <i>></i></button></a>
+            <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank"><button>Watch Trailer <i>
+            <FontAwesomeIcon icon={faCaretRight} />
+      </i></button></a>
         </div>
       
         <div className={styles.floater}>
@@ -56,7 +80,7 @@ export default function Home() {
         <section className={styles.recentContainer}>
             <div className={styles.recentHeader}>
                 <h1>Recent Movies</h1>
-                <p>See More</p>
+                <Link href="/explore-movies"><p>See More</p></Link>
             </div>
             
             <div className={styles.cardsContainer}>
@@ -71,7 +95,7 @@ export default function Home() {
         <section className={styles.recentContainer2}>
             <div className={styles.recentHeader}>
                 <h1>Recent Reviews</h1>
-                <p>See More</p>
+                <Link href="/allreviews"><p>See More</p></Link>
             </div>
             
             <div className={styles.cardsContainer}>

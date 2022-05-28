@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import heroPic from '../assets/images/oct.jpg';
 import styles from '../styles/ReviewCard.module.css';
+import Link from 'next/link'
 
 function ReviewCard(){
     return(
+        <Link href="/allreviews/sull">
         <article className={styles.singleCard}>
             <header className={styles.singleCardHeader}>
                 
@@ -36,6 +38,7 @@ function ReviewCard(){
 
         
         </article>
+        </Link>
     )
 }
 

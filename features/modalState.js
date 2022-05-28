@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit';
-import styles from '../styles/Sidebar.module.css';
 
 const initialStateValue=false;
 

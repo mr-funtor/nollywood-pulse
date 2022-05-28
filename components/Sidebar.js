@@ -1,9 +1,22 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import styles from '../styles/Sidebar.module.css';
 import Link from 'next/link';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserXmark,
+    faBars,
+    faXmark
+}from "@fortawesome/free-solid-svg-icons";
+import {useRouter} from 'next/router';
+
+//firebase
+import {onAuthStateChanged,signOut,auth} from '../config/firebase.config'
+
+//redux
 import { useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
 import {closeSide} from '../features/sideClose';
+import {logout,login} from '../features/login';
 
 const theLinks=[
     {
@@ -17,14 +30,53 @@ const theLinks=[
 
 function Sidebar(){
     const shower= useSelector((state)=>state.sideBar);
-    const dispatch=useDispatch()
+    const loginState= useSelector((state)=>state.login);
+    const navState= useSelector((state)=>state.nav);
+    const dispatch=useDispatch();
+    
+    const router= useRouter();
     
     const [isHidden, setIsHidden]=useState(styles.stayHidden);
-    const [presentPage,setPresentpage]=useState('Your')
+//    const [presentPage,setPresentpage]=useState('Your');
+    
+    //Detect auth state
+    useEffect(()=>{
+       onAuthStateChanged(auth, user=>{
+    if(user !== null){
+        dispatch(login())
+        console.log('logged in')
+    }else{
+        dispatch(logout())
+        console.log('no user')
+    }
+}) 
+    },[])
+    
+//signs out the user form the app
+    function LoginOrOut(){
+        console.log('clicked log in button',loginState)
+        
+        if(loginState){
+          return signOut(auth).then(() => {
+              // Sign-out successful.
+            }).catch((error) => {
+              // An error happened.
+            });
+           }
+               //takes the user to the login page
+        router.push('/signin')
+           console.log('end')
+        
+        
+    }
+
     
     return(
     <nav className={`${styles.sidebar} ${shower}`}>
-            <button onClick={()=>dispatch(closeSide())}>Click</button>
+            
+        <i onClick={()=>dispatch(closeSide())}>
+        <FontAwesomeIcon icon={faXmark} />
+        </i>
         
         <div className={styles.categoriesBox}>    
             <section>
@@ -32,7 +84,7 @@ function Sidebar(){
                     <div>
                         <i>*</i>
                         <Link href='/'>
-                            <a className={presentPage==='Home' ? styles.active : ''}>Home</a>
+                            <a className={navState==='Home' ? styles.active : ''}>Home</a>
                         </Link>
                     </div>
 
@@ -40,7 +92,7 @@ function Sidebar(){
                         <i>*</i>
                         <Link href='/allreviews'>
                             <a
-                                className={presentPage==='Reviews' ? styles.active : ''}>Reviews</a>
+                                className={navState==='Reviews' ? styles.active : ''}>Reviews</a>
                         </Link>
                     </div>
 
@@ -48,7 +100,7 @@ function Sidebar(){
                         <i>*</i>
                         <Link href='/explore-movies'>
                             <a
-                                className={presentPage==='Explore' ? styles.active : ''}>Explore Movies</a>
+                                className={navState==='Explore' ? styles.active : ''}>Explore Movies</a>
                         </Link>
                     </div>
 
@@ -59,14 +111,14 @@ function Sidebar(){
                     <div>
                         <i>*</i>
                         <Link href='/personal-reviews'>
-                            <a className={presentPage==='Your' ? styles.active : ''}>Your Reviews</a>
+                            <a className={navState==='Your' ? styles.active : ''}>Your Reviews</a>
                         </Link>
                     </div>
 
                     <div>
                         <i>*</i>
                         <Link href='/watchlist'>
-                            <a className={presentPage==='watch' ? styles.active : ''}>Watchlist</a>
+                            <a className={navState==='watch' ? styles.active : ''}>Watchlist</a>
                         </Link>
                     </div>
 
@@ -78,7 +130,7 @@ function Sidebar(){
                         <i>*</i>
                         <Link href='/setting'>
                             <a
-                                className={presentPage==='Setting' ? styles.active : ''}
+                                className={navState==='Setting' ? styles.active : ''}
                                 >Setting</a>
                         </Link>
                     </div>
@@ -86,7 +138,7 @@ function Sidebar(){
                     <div>
                         <i>*</i>
                         <Link href='/'>
-                            <a className={presentPage==='Login' ? styles.active : ''}>Login</a>
+                            <a onClick={()=>LoginOrOut()} className={navState==='Login' ? styles.active : ''}>{loginState ? 'Logout' : 'Login'}</a>
                         </Link>
                     </div>
 

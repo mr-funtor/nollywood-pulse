@@ -88,8 +88,10 @@
 }
 
 .coverTop i{
-    font-size: 40px;
+    display: flex;
+    font-size: 30px;
     color:yellow;
+    margin-right: 10px;
 }
 
 .coverTop p{
@@ -101,6 +103,7 @@
     color: #fff;
     font-size: 19px;
     margin: 20px 0 45px 0;
+    line-height: 150%;
 }
 
 .heroCoverBox>a{
@@ -128,8 +131,10 @@
 /*    transform: scale(1.03);*/
 }
 
-.heroCoverBox>button>i{
+.heroCoverBox>a>button>i{
     margin-left: 5px;
+    display: flex;
+    align-items: center;
 }
 
 

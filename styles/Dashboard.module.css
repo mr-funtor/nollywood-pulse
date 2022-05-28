@@ -1,0 +1,90 @@
+.dashContainer{
+/*    background: pink;*/
+    width: 40%;
+    height: 100vh;
+    margin:0 auto;
+    color:#fff;
+    padding-top: 12vh;
+}
+
+.dashContainer>nav{
+    height: 8vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.dashContainer>nav>h3{
+    cursor: pointer;
+    width: 30%;
+    text-align: center;
+    padding: 10px 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.active{
+    border-bottom: 1px solid #fff;
+}
+
+.notact{
+    color:grey;
+}
+
+.notact:hover{
+    color:#fff;
+}
+
+.dashContainer div{
+    margin-bottom: 35px;
+}
+
+.dashContainer label{
+    display: block;
+     font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.dashContainer input:not([type=file]),
+.dashContainer textarea{
+    height: 35px;
+    background: #000;
+    width:100%;
+    border: 1px solid #fff;
+    border-radius:5px;
+    padding: 10px;
+    color: #fff;
+}
+
+.dashContainer textarea{
+    height: 100px;
+    resize: none;
+    padding: 10px;
+    color: #fff;
+}
+
+
+.actionArea{
+    display: flex;
+    justify-content: space-between;
+}
+
+.actionArea button{
+    background: none;
+    height: 40px;
+    width:100px;
+    border: 1px solid #fff;
+    border-radius: 50px;
+    color:#fff;
+    cursor: pointer;
+}
+
+.actionArea button:last-child{
+    background: #fff;
+    color:#000;
+}
+
+
+
+

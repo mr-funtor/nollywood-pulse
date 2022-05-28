@@ -1,0 +1,61 @@
+.reviewContainer{
+/*    background: pink;*/
+    width: 50%;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 15vh 2vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+}
+
+.reviewAside{
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 30px
+}
+
+.reviewAside>div{
+    background: yellow;
+    position: relative;
+    height: 150px;
+    width: 150px;
+    margin-bottom: 12px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.theImage{
+    position: absolute !important;
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.reviewAside>p:nth-child(2){
+   margin-bottom: 16px; 
+}
+
+.reviewAside>p:nth-child(3){
+   font-size: 14px;
+}
+
+.reviewAside>i{
+   font-size: 25px;
+    color: yellow;
+}
+
+.reviewBody{
+/*    margin-top: -6vh;*/
+}
+
+.reviewBody>h1{
+    font-size: 30px;
+    margin-bottom: 20px; 
+}
+
+.reviewBody>p{
+    line-height: 180%;
+}

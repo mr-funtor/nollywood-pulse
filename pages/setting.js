@@ -1,10 +1,29 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import styles from '../styles/Setting.module.css';
+import {useRouter} from 'next/router';
 
+//redux
+import {useDispatch,useSelector} from 'react-redux';
+import {switcher} from '../features/navState';
 
 function Setting(){
     const [name, setName]=useState('Charles')
-    const [email, setEmail]=useState('guan@gmail')
+    const [email, setEmail]=useState('guan@gmail');
+    const  dispatch= useDispatch();
+    const router= useRouter()
+    
+    //if the user is not logged in, the user is redirected to a signin page
+    const loginState= useSelector((state)=>state.login);
+    
+    //this changes the color of the nav items in the side bar
+    useEffect(()=>{
+        dispatch(switcher('Setting'));
+        if(!loginState){
+        router.push('/signin')
+        return
+    }
+    },[])
+    
     
     return(
         <section className={styles.pageContainer}>
@@ -38,3 +57,5 @@ function Setting(){
 }
 
 export default Setting;
+
+    

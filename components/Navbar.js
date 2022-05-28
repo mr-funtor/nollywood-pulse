@@ -2,6 +2,12 @@ import Link from 'next/link';
 import styles from '../styles/Navbar.module.css';
 import {useDispatch} from 'react-redux';
 import {openSide} from '../features/sideClose';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSearch,
+  faUserGear,
+    faBars
+} from "@fortawesome/free-solid-svg-icons";
 
 
 function Navbar(){
@@ -13,12 +19,20 @@ function Navbar(){
             <Link href="/">
                 <a>Nollywood Pulse</a>
             </Link>
-        </h3>    
+        </h3>
+        
+        
             
         <ul>
-            <li><i>x</i></li>    
+            <li>
+                <i><FontAwesomeIcon
+                icon={faSearch}/></i>
+            </li>    
             <li onClick={()=>{
-        dispatch(openSide())}}><i >0</i></li> 
+        dispatch(openSide())}}>
+                <i ><FontAwesomeIcon
+                icon={faBars}/></i>
+            </li> 
         </ul>
         
     </nav>

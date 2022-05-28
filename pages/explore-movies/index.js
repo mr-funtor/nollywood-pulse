@@ -1,6 +1,8 @@
 import styles from '../../styles/PersonalReviews.module.css';
 import RecentCard from '../../components/RecentCard';
 import Modal from "../../components/Modal";
+
+//redux
 import {useSelector} from 'react-redux';
 
 function allMoviesPage(){
