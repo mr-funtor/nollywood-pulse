@@ -3,15 +3,16 @@ import heroPic from '../assets/images/oct.jpg';
 import styles from '../styles/ReviewCard.module.css';
 import Link from 'next/link'
 
-function ReviewCard(){
+function ReviewCard({review}){
+    const {author,authorImage, movieId, movieTitle,rating,text,id}=review
     return(
-        <Link href="/allreviews/sull">
+        <Link href={`/allreviews/${id}`}>
         <article className={styles.singleCard}>
             <header className={styles.singleCardHeader}>
                 
                 <div className={styles.personInfo}>
                     <div className={styles.imageContainer}>
-                                <Image className={styles.theImage} src={heroPic}
+                                <Image className={styles.theImage} src={authorImage}
                         alt="a picture for the movie" layout="fill"/>
 
 
@@ -19,21 +20,20 @@ function ReviewCard(){
                 
                     <div className={styles.namebox}>
                        <p>Review by</p> 
-                       <p>Tosin Ojo</p>
+                       <p>{author}</p>
                         <i>****</i>
                     </div>
                 </div>
                 
                 <div>
-                    <h3 className={styles.movieTitle}>Wedding Party</h3>
+                    <h3 className={styles.movieTitle}>{movieTitle}</h3>
                 </div>
                
             </header>
         
             <footer>
-                <p>ljljljd hjdk hdkh hdhjlj to kndj the ldljal ljljljd hjdk hdkh hdhjlj to kndj the ldljal
-        ljljljd hjdk hdkh hdhjlj to kndj the ldljal ljljljd hjdk hdkh hdhjlj to kndj the ldljal
-        <span> Read more</span></p>
+                <p>{text.slice(0,70)}
+        <span> ...</span></p>
             </footer>
 
         

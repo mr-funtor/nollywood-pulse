@@ -1,33 +1,67 @@
-import {useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import styles from '../styles/PersonalReviews.module.css';
 import ReviewCard from '../components/ReviewCard';
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/router';
+import Loader from '../components/LoadingModal';
 
 //redux
-//import { useSelector} from 'react-redux';
 import {useDispatch,useSelector} from 'react-redux';
 import {switcher} from '../features/navState';
 
+//firebase
+import { collection, getDocs,query,where } from "firebase/firestore"; 
+import {db,auth} from '../config/firebase.config';
+
 function PersonalReviewsPage(){
-    const router= useRouter()
+    const [reviewsData,setReviewsData]=useState(null);
+    const router= useRouter();
     const dispatch= useDispatch();
     const loginState= useSelector((state)=>state.login);
     
     
     useEffect(()=>{
+        console.log('out reviews')
         //this changes the color of the nav items in the side bar
         dispatch(switcher('Your'));
         
         //this redirects the user to a signin page if they are not signed in
         if(!loginState){
-        console.log('not here')
-        router.push('/signin')
-        return
-    }
+            console.log('not here')
+            router.push('/signin')
+            return
+        }
+        
+         const getMovies=async()=>{
+             console.log('reviews')
+            const user= auth.currentUser;
+           
+            try{
+            
+            //get the reviews
+            const reviewsRef=collection(db, "reviews");
+            const q = query(reviewsRef, where("authorId", "==", user.uid));
+                
+            const packedReviews= await getDocs(q);
+            const reviewsData=packedReviews.docs.map((doc) => {
+            
+              return  {id:doc.id,...doc.data()}
+            })
+            
+         
+        setReviewsData(reviewsData)   
+                
+            }catch(error){
+                console.log(error)
+            }
+        
+        }
+         
+         getMovies()
+        
     },[])
     
     
-    
+    if(reviewsData===null)return <Loader/>;
     
     
   
@@ -38,11 +72,11 @@ function PersonalReviewsPage(){
                 <h1>Your Reviews</h1>
                 
                 <div className={styles.reviewsContainer}>
-                    <ReviewCard />
-                    <ReviewCard />
-                    <ReviewCard />
-                    <ReviewCard />
-                    <ReviewCard />
+            {
+                  reviewsData.map((review)=>{
+                    return <ReviewCard key={review.id} review={review}/>
+                })
+                    }
                 </div>
                 
             </section>

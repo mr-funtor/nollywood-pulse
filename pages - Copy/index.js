@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState,useEffect} from 'react';
+import {useEffect} from 'react';
 import Head from 'next/head'
 import Image from 'next/image';
 import styles from '../styles/Home.module.css'
@@ -7,6 +7,7 @@ import heroPic from '../assets/images/40.png'
 import tempBlood from '../assets/images/blood.jpg'
 import RecentCard from '../components/RecentCard'
 import ReviewCard from '../components/ReviewCard';
+import Modal from "../components/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserXmark,
@@ -14,7 +15,6 @@ import {
     faStar
 }from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
-import Loader from '../components/LoadingModal';
 
 //redux
 import {useSelector} from 'react-redux';
@@ -22,68 +22,27 @@ import {useDispatch} from 'react-redux';
 import {switcher} from '../features/navState';
 
 
-//firebase
-import { collection, getDocs } from "firebase/firestore"; 
-import {db} from '../config/firebase.config';
-
 export default function Home() {
-    const [allmovies, setAllMovies]=useState([])
-    const [allreviews, setAllReviews]=useState([])
     const dispatch= useDispatch();
     const modalState= useSelector((state)=>state.modal)
-    
-    
 
+//this changes the color of the nav items in the side bar
     useEffect(()=>{
-        //this changes the color of the nav items in the side bar
         dispatch(switcher('Home'))
-        
-        
-        const getMovies=async()=>{
-            
-            try{
-                //gets movie data for the second sectionfrom firebase
-            const movRef = collection(db, "movies");
-             const hut= await getDocs(movRef);
-            const moviesData=hut.docs.map((doc) => {
-              return  {id:doc.id,...doc.data()}
-            })
-            
-            //get the reviews
-            const reviewRef=collection(db, "reviews");
-            const packedReviews= await getDocs(reviewRef);
-            const reviewsData=packedReviews.docs.map((doc) => {
-                console.log({...doc.data()})
-              return  {id:doc.id,...doc.data()}
-            })
-            
-        setAllMovies(moviesData)   
-        setAllReviews(reviewsData)   
-                
-            }catch(error){
-                console.log(error)
-            }
-        
-        }
-
-        getMovies()
-        
-    },[]) 
-    
-    if(allmovies.length===0)return <Loader/>
+    },[])    
     
   return (
     <section className={styles.heroSection}>
       
       
       <div className={styles.imageContainer}>
-        <Image className={styles.theImage}  src={allmovies[0].image} alt="a picture for the movie" layout="fill"/>
+        <Image className={styles.theImage} placeholder="blur"  src={tempBlood} alt="a picture for the movie" layout="fill"/>
       </div>
       
       <section className={styles.heroCover}>
         <div className={styles.heroCoverBox}>
             <div className={styles.coverTop}>
-                <h1>{allmovies[0].title}</h1>
+                <h1>Blood Sisters</h1>
                 <div>
                     <i>
                         <FontAwesomeIcon icon={faStar} />
@@ -95,7 +54,10 @@ export default function Home() {
                 </div>
             </div>
 
-            <p>{allmovies[0].description}
+            <p>jdouf dkljlfdjld dljlfjdojl jdojojfodjf
+          ndnlkn sndnl dnlfdnlsjdouf dkljlfdjld dljlfjdojl jdojojfodjf
+          ndnlkn sndnl dnlfdnlsjdouf dkljlfdjld dljlfjdojl jdojojfodjf
+          ndnlkn sndnl dnlfdnlsjdouf dkljlfdjld dljlfjdojl jdojojfodjf
           ndnlkn sndnl dnlfdnls</p>
 
             <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank"><button>Watch Trailer <i>
@@ -123,13 +85,11 @@ export default function Home() {
             </div>
             
             <div className={styles.cardsContainer}>
-            {
-            allmovies.map((movie)=>{
       
-            return <RecentCard key={movie.id} movie={movie}/>
-  })
-      }
-                
+                <RecentCard />
+                <RecentCard />
+                <RecentCard />
+                <RecentCard />
             </div>
         </section>
       
@@ -140,13 +100,9 @@ export default function Home() {
             </div>
             
             <div className={styles.cardsContainer}>
-                {
-                allreviews.map((review)=>{
-                return <ReviewCard key={review.id} review={review} />
-                
-            })
-            }
-                
+                <ReviewCard />
+                <ReviewCard />
+                <ReviewCard />
             </div>
         </section>
       

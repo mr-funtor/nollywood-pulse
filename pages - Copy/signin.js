@@ -15,7 +15,7 @@ function signinPage(){
     const provider= new GoogleAuthProvider
     
     //this takes the page they were previuosly on if they are already logged in
-//    if(loginState)return router.back();
+    if(loginState)return router.back();
     
     function siginUser(){
         signInWithPopup(auth, provider)
@@ -26,7 +26,7 @@ function signinPage(){
     // The signed-in user info.
     const user = result.user;
     console.log(user)
-    router.push('/')
+    router.back()
     // ...
   }).catch((error) => {
     // Handle Errors here.

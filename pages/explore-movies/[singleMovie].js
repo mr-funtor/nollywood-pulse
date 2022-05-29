@@ -1,18 +1,108 @@
+import {useState,useEffect} from 'react';
 import {useRouter} from 'next/router';
 import Image from 'next/image';
 import tempBlood from '../../assets/images/blood.jpg';
 import styles from '../../styles/SingleMovie.module.css';
 import ReviewCard from '../../components/ReviewCard';
+import Loader from '../../components/LoadingModal';
+
+//redux
+import {useSelector,useDispatch} from 'react-redux';
+import {fillMovieId} from '../../features/ratingState';
+import {openModal} from '../../features/modalState';
+import {showing, notShowing} from '../../features/popUpState';
+
+
+//firebase
+import { collection, doc, getDoc,query,getDocs,where } from "firebase/firestore"; 
+import {auth,db} from '../../config/firebase.config';
 
 function Movie(){
+    const [movieData,setMovieData]=useState(null);
+    const [reviewsData,setReviewsData]=useState(null);
+     const dispatch =useDispatch();
     const router=useRouter();
-    const singleMovie= router.query.singleMovie;
+    
+    
+    const callers=()=>{
+        dispatch(openModal()); dispatch(fillMovieId({id:movieData.id,title:movieData.title}))
+    }
+    
+        const showThePopUp=async()=>{
+        //check if the user is signed in
+            const user=auth.currentUser
+        if(user===null)return dispatch(showing('Please sign in'));
+        
+        //check if the movie has been saved by the user before
+            const watchlistRef=collection(db, 'watchlist');
+            const q= query(watchlistRef, where('userId','==',user.uid),where('id','==',movieData.id))
+        const querySnapshot = await getDocs(q);
+        if(querySnapshot?.docs[0]?.data()){
+            dispatch(showing('Movie already in watchlist'));
+            return setTimeout(()=>{
+            dispatch(notShowing());
+        },2000)
+        }
+        
+           //save movie into database
+        const watchDetails={
+            userId:user.uid,
+            id:movieData.id,
+            image:movieData.image,
+            title:movieData.title,
+            rating:movieData.rating
+        }
+        
+        const docRef= await addDoc(watchlistRef, watchDetails)
+        
+        dispatch(showing('Movie added to watchlist'));
+        
+        setTimeout(()=>{
+            dispatch(notShowing());
+        },2000)
+    }
+    
+    
+    useEffect(()=>{
+        const fetchMovie=async()=>{
+            
+            try{
+                //fetch the data for the single movie
+               const singleMovie= router.query.singleMovie;
+            const docRef = doc(db, "movies", singleMovie);
+           const docSnap = await getDoc(docRef); 
+                
+                //fetch the reviews for this movie
+                const reviewsRef= collection(db,"reviews");
+                
+                const q = query(reviewsRef, where("movieId", "==", `${singleMovie}`));
+                
+                const data= await getDocs(q)
+//                console.log(data.docs[0].data())
+                const movieReviews=data.docs.map((doc)=>{
+                    return{id:doc.id,...doc.data()}
+                })
+                
+            setMovieData({...docSnap.data(),id:docSnap.id}) 
+            setReviewsData(movieReviews)
+//                console.log(movieReviews)
+            }catch(error){
+                console.log(error)
+            }
+            
+        }
+        
+        fetchMovie()
+//        console.log(movieData)
+    },[])
+    
+    if(movieData===null || reviewsData===null)return <Loader/>
     
     return(
         <main>
             <section className={styles.topSection}>
                 <div className={styles.imageContainer}>
-                 <Image className={styles.theImage} placeholder="blur"  src={tempBlood} alt="a picture for the movie" layout="fill"/>
+                 <Image className={styles.theImage}  src={movieData.image} alt="a picture for the movie" layout="fill"/>
               </div>
         
                  <section className={styles.heroCover}>
@@ -24,28 +114,31 @@ function Movie(){
             
             <section className={styles.movieBody}>
                 <div className={styles.movieBodyTop}>
-                    <h1>WEDDING PARTY</h1>
+                    <h1>{movieData.title.toUpperCase()}</h1>
                     <div className={styles.actionArea}>
                         <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank"><button>Watch Trailer <i>></i></button></a>
                         
-                        <b>Give Review/Rating</b>
+                        <b onClick={()=>callers()}>Give Review/Rating</b>
                         
-                        <i>+</i>
+                        <i onClick={()=>showThePopUp()}>+</i>
                     </div>
                     
                     <section className={styles.synopsis}>
                         <h1>Synopsis</h1>
                     
-                        <p>jldjljsl ljdljls ljsljd
-                        shhd ndiid sdksoj sjdkh shkdhsk shkdh sihksos skdkhs sndkhis dhshsa skhd skdhks shdid shdhiosn sikhdo</p>
+                        <p>{movieData.description}</p>
                     </section>
                     
                     <section className={styles.reviewContainer}>
                         <h1>Reviews</h1>
                         
                         <div>
-                            <ReviewCard/>
-                            <ReviewCard/>
+                    {
+                        reviewsData.map((review)=>{
+                        return <ReviewCard key={review.id} review={review}/>
+                    })
+                    }
+                        
                         
                         </div>
                     
@@ -60,17 +153,7 @@ function Movie(){
 
 export default Movie;
 
-export async function getServerSideProps(context){
-    const {params, query}= context;
-    const {singleMovie}=params;
-//    const response= await fetch(
-//    `http://localhost:4000/news?category=${category}`
-//    )
-//    const data= await response.json();
-    
-    return{
-        props:{
-            
-        }
-    }
-}
+
+  
+
+

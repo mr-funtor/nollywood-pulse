@@ -1,6 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-const initialStateValue=false;
+const initialStateValue={
+    isOpen:false,
+    hasRated:false,
+};
 
 export const modalSlice= createSlice({
     name:'modal',
@@ -9,16 +12,22 @@ export const modalSlice= createSlice({
     reducers:{
         openModal:(state,action)=>{
             
-            return state= true;
+            return state= {...state,isOpen:true};
         },
         closeModal:(state,action)=>{
-            console.log(state)
-           return state= false;
+            
+           return state= {...state,isOpen:false};
         },
+        makeRated:(state,action)=>{
+            return state= {...state,hasRated:true};
+        },
+        notRated:(state,action)=>{
+            return state= {...state,hasRated:false};
+        }
      },
 })
 
 //the actions
-export const {openModal,closeModal}=modalSlice.actions;
+export const {openModal,closeModal,makeRated,notRated}=modalSlice.actions;
 
 export default modalSlice.reducer;

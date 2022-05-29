@@ -1,6 +1,6 @@
 import styles from '../styles/Dashboard.module.css';
 
-function UpdateComponent(){
+function UpdateComponent({takeHoldOfImage,uploadMovieDetails}){
     return(
     <section >
         <section>
@@ -11,7 +11,10 @@ function UpdateComponent(){
             
             <div>
                 <label htmlFor="poster">Upload Poster Image</label>
-                <input id="poster" type="file" required/>
+                <input id="poster" type="file" id="movie" name="movie" accept="image/png, image/jpeg" 
+                
+                onChange={(e)=>takeHoldOfImage(e.target.files[0])}
+        required/>
             </div>
             
             <div>
@@ -28,7 +31,7 @@ function UpdateComponent(){
     
             <div className={styles.actionArea}>
                 <button>Cancel</button>
-                <button>Save</button>
+                <button onClick={uploadMovieDetails}>Save</button>
             </div>
         
         

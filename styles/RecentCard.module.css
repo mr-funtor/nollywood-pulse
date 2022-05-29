@@ -49,9 +49,12 @@
 }
 
 .overlayFooter i{
-    color: yellow;
     font-size: 28px;
     margin-right: 10px;
+}
+
+.overlayFooter i.active{
+    color: yellow;
 }
 
 .overlayFooter>button{

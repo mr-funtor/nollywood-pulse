@@ -53,7 +53,7 @@ function Sidebar(){
     },[])
     
 //signs out the user form the app
-    function LoginOrOut(){
+   const  LoginOrOut=()=>{
         console.log('clicked log in button',loginState)
         
         if(loginState){
@@ -124,7 +124,7 @@ function Sidebar(){
 
             </section>
 
-            <section>
+            <section >
                 <h3>GENERAL</h3>
                     <div>
                         <i>*</i>
@@ -137,9 +137,9 @@ function Sidebar(){
 
                     <div>
                         <i>*</i>
-                        <Link href='/'>
+                        
                             <a onClick={()=>LoginOrOut()} className={navState==='Login' ? styles.active : ''}>{loginState ? 'Logout' : 'Login'}</a>
-                        </Link>
+                        
                     </div>
 
             </section>    
