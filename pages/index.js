@@ -23,7 +23,7 @@ import {switcher} from '../features/navState';
 
 
 //firebase
-import { collection, getDocs } from "firebase/firestore"; 
+import { collection, getDocs,query,limit } from "firebase/firestore"; 
 import {db} from '../config/firebase.config';
 
 export default function Home() {
@@ -44,14 +44,16 @@ export default function Home() {
             try{
                 //gets movie data for the second sectionfrom firebase
             const movRef = collection(db, "movies");
-             const hut= await getDocs(movRef);
+            const q= query(movRef, limit(8) )
+             const hut= await getDocs(q);
             const moviesData=hut.docs.map((doc) => {
               return  {id:doc.id,...doc.data()}
             })
             
             //get the reviews
             const reviewRef=collection(db, "reviews");
-            const packedReviews= await getDocs(reviewRef);
+            const q2= query(reviewRef, limit(6) )
+            const packedReviews= await getDocs(q2);
             const reviewsData=packedReviews.docs.map((doc) => {
                 console.log({...doc.data()})
               return  {id:doc.id,...doc.data()}

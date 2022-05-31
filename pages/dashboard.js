@@ -1,43 +1,70 @@
 import {useState} from 'react';
 import styles from '../styles/Dashboard.module.css';
 import UpdateArea from '../components/UpdateArea';
+import { v4 as uuidv4 } from 'uuid';
+
+//redux
+import {useSelector,useDispatch} from 'react-redux';
+import {showing, notShowing} from '../features/popUpState';
+
 
 //firebase
-import { getStorage, ref,uploadBytesResumable,getDownloadURL } from "firebase/storage";
+import { getStorage, ref,uploadBytesResumable,getDownloadURL,uploadBytes } from "firebase/storage";
 import {storage} from '../config/firebase.config';
-const imagesRef = ref(storage, 'movies/bulb');
-
-
+const imagesRef = ref(storage, `${uuidv4()}`);
+import {db,auth} from '../config/firebase.config';
+import {collection, doc, addDoc,Timestamp,increment,updateDoc,getDoc,query,getDocs,where } from "firebase/firestore"; 
 
 function Dashboard(){
-    const [onPost, setOnPost]=useState(true)
+    const [onPost, setOnPost]=useState(true);
+    const [theMovieTitle, setTheMovieTitle]=useState('');
+    const [synopsis, setSynopsis]=useState('');
+    const [releaseYear, setReleaseYear]= useState(0);
     const [theImage,setTheImage]=useState(null);
-    
-    
-    
-    const takeHoldOfImage=(theFile)=>{
-        setTheImage(theFile);
-        console.log(theImage)
-    }
+    const dispatch=useDispatch();
     
     const uploadMovieDetails=()=>{
-        const uploadTask = uploadBytesResumable(imagesRef, theImage);
         
-        
-        uploadTask.on('state_changed', 
-   () => {
-    // Handle successful uploads on complete
-    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        // 'file' comes from the Blob or File API
+    uploadBytes(imagesRef, theImage).then((snapshot) => {
+      const theU=getDownloadURL(snapshot.ref).then((downloadURL) => {
       console.log('File available at', downloadURL);
-    });
-            
-            
-  },
-  (error) => {
-    console.log(error)
-  }
-);
+          return downloadURL
+    })
+      return theU
+        
+    }).then(async(downloadURL)=>{
+        const movieRef=collection(db,'movies');
+        
+        const movie={
+             title: theMovieTitle,
+    year: releaseYear,
+    rating:0,
+    totalratings:0,
+    numberOfPeopleRating:0,
+    description:synopsis,
+    producer:"",
+    Director:"",
+    Cast:[],
+    image:downloadURL
+        }
+        
+        await addDoc(movieRef,movie);  
+          
+        setTheMovieTitle('');
+        setSynopsis('');
+        setReleaseYear(0);
+        setTheImage(null)
+        
+        //This tells the user that the movie was upload
+        dispatch(showing('Movie uploaded'));
+        
+        setTimeout(()=>{
+            dispatch(notShowing());
+        },2000)
+        
+      });
+        
         
     }
         
@@ -56,8 +83,12 @@ function Dashboard(){
              >Update Movie</h3>   
         </nav> 
        
-        {onPost && <UpdateArea takeHoldOfImage={takeHoldOfImage}
+        {onPost && <UpdateArea
                        uploadMovieDetails={uploadMovieDetails}
+                       theMovieTitle={theMovieTitle} setTheMovieTitle={setTheMovieTitle}
+                       synopsis={synopsis} setSynopsis={setSynopsis}
+                       releaseYear={releaseYear} setReleaseYear={setReleaseYear}
+                       theImage={theImage} setTheImage={setTheImage}
                        />}
         
          {!onPost && <input type="text" placeholder="search for the movie"/>}   
