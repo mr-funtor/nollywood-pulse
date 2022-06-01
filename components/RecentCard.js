@@ -3,6 +3,10 @@ import heroPic from '../assets/images/oct.jpg';
 import styles from '../styles/RecentCard.module.css';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faStar
+}from "@fortawesome/free-solid-svg-icons";
 
 //redux
 import {useSelector} from 'react-redux';
@@ -81,12 +85,12 @@ function recentCards({movie}){
                 <footer className={styles.overlayFooter}>
                     <p data-type="see">{title}</p>
                     <div>
-                        <i className={`${rating/2>=1 ? styles.active : ''}`}>*</i>
+                        <i className={`${rating/2>=1 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
 
-                        <i className={`${rating/2>=2 ? styles.active : ''}`}>*</i>
-                        <i className={`${rating/2>=3 ? styles.active : ''}`}>*</i>
-                        <i className={`${rating/2>=4 ? styles.active : ''}`}>*</i>
-                        <i className={`${rating/2>=5 ? styles.active : ''}`}>*</i>
+                        <i className={`${rating/2>=2 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={`${rating/2>=3 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={`${rating/2>=4 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={`${rating/2>=5 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
                         <p>{rating}</p>
                     </div>
                     <button onClick={()=>callers()}

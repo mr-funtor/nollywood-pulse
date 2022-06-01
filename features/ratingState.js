@@ -2,7 +2,8 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialStateValue={
     id:'',
-    title:''
+    title:'',
+//    rating:0
 };
 
 export const ratingSlice= createSlice({
@@ -14,10 +15,14 @@ export const ratingSlice= createSlice({
             console.log('click',action.payload)
             return state= {...action.payload};
         },
+        unfill:(state,action)=>{
+            
+            return state= initialStateValue;
+        }
      },
 })
 
 //the actions
-export const {fillMovieId}=ratingSlice.actions;
+export const {fillMovieId,unfill}=ratingSlice.actions;
 
 export default ratingSlice.reducer;

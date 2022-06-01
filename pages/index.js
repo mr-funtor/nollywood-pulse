@@ -87,13 +87,12 @@ export default function Home() {
             <div className={styles.coverTop}>
                 <h1>{allmovies[0].title}</h1>
                 <div>
-                    <i>
-                        <FontAwesomeIcon icon={faStar} />
-      <FontAwesomeIcon icon={faStar} />
-      <FontAwesomeIcon icon={faStar} />
-      <FontAwesomeIcon icon={faStar} />
-                    </i>
-                    <p><span>3.4</span>/5</p>
+                    <i className={allmovies[0].rating >=1?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={allmovies[0].rating >=2?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={allmovies[0].rating >=3?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={allmovies[0].rating >=4?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={allmovies[0].rating >=5?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                    <p><span>{allmovies[0].rating}</span>/5</p>
                 </div>
             </div>
 

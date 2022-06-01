@@ -2,10 +2,16 @@ import Link from 'next/link';
 import styles from '../styles/Modal.module.css';
 import {useState,useEffect} from 'react';
 import {useRouter} from 'next/router';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserXmark,
+    faCaretRight,
+    faStar
+}from "@fortawesome/free-solid-svg-icons";
 
 //redux
 import {useSelector,useDispatch} from 'react-redux';
-import {fillMovieId} from '../features/ratingState';
+import {fillMovieId,unfill} from '../features/ratingState';
 import {closeModal,makeRated,notRated} from '../features/modalState';
 
 //firebase
@@ -14,7 +20,7 @@ import {db,auth} from '../config/firebase.config';
 
 function Modal(){
     const [theText,setTheText]=useState('');
-    const [personalRating, setPersonalRating]=useState(3);
+    const [personalRating, setPersonalRating]=useState(0);
     const [isEditing, setIsEditing]=useState(false);
     const [reviewId,setReviewId]=useState('');
     
@@ -22,7 +28,7 @@ function Modal(){
     const dispatch= useDispatch();
     const {isOpen,hasRated}=useSelector((state)=>state.modal);
 //    const modalState= useSelector((state)=>state.modal);
-    const {title,id}= useSelector((state)=>state.rating);
+    const {title,id,rating}= useSelector((state)=>state.rating);
      const reviewsRef=collection(db, 'reviews');
     const user=auth.currentUser;
     
@@ -71,7 +77,7 @@ function Modal(){
         const newField= {text:theText};
         await updateDoc(reviewDoc,newField);
         setIsEditing(false);
-        closeAndStopRated()
+        closeAndStopRated();
     }
     
     useEffect(()=>{
@@ -115,8 +121,14 @@ function Modal(){
     },[isOpen])
     
     const closeAndStopRated=()=>{
+           setIsEditing(false);
+           setTheText('');
+           setPersonalRating(0);
+           setReviewId('')
         dispatch(closeModal())
         dispatch(notRated())//this makes the post button inactive
+        dispatch(unfill())//makes the modal plain
+           
     }
     
     return(
@@ -124,7 +136,13 @@ function Modal(){
         {isOpen && (<section className={styles.modal}>
             <button onClick={()=>closeAndStopRated()}>Close</button>
         <div>
-            <h1 onClick={()=>dispatch(makeRated())}>* * * * *</h1>
+            <h1 onClick={()=>dispatch(makeRated())}>
+            <i className={isEditing && personalRating >=1 ? styles.active:''}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={rating >=2?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={rating >=3?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={rating >=4?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={rating >=5?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+           </h1>
             <textarea onChange={(e)=>setTheText(e.target.value)}
             value={theText}
 placeholder="What's your review? (optional)" maxLength="500">

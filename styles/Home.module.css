@@ -90,13 +90,18 @@
 .coverTop i{
     display: flex;
     font-size: 30px;
-    color:yellow;
-    margin-right: 10px;
+    color: #fff;
+    margin-right: 5px;
+}
+
+.coverTop i.active{
+   color:yellow; 
 }
 
 .coverTop p{
     font-size: 22px;
     color: #fff;
+    margin-left: 10px;
 }
 
 .heroCoverBox>p{

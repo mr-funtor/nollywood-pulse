@@ -25,10 +25,17 @@
 }
 
 .modal>div>h1{
-    color: yellow;
     font-size: 50px;
     text-align: center;
     margin-bottom: 10px;
+}
+
+.modal>div>h1 i{
+    color:#fff;
+}
+
+.modal>div>h1 i.active{
+    color:yellow;
 }
 
 .modal>div>textarea{
