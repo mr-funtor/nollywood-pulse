@@ -17,7 +17,7 @@
     margin-right: 30px
 }
 
-.reviewAside>div{
+.reviewAside>div:not(div:nth-child(4)){
     background: yellow;
     position: relative;
     height: 150px;
@@ -42,9 +42,15 @@
    font-size: 14px;
 }
 
-.reviewAside>i{
+/*
+.reviewAside i{
    font-size: 25px;
     color: yellow;
+}
+*/
+
+.reviewAside i.active{
+    color: orange;
 }
 
 .reviewBody{

@@ -27,10 +27,29 @@
     align-items:flex-end;
 }
 
-.heroCover>h1{
-    font-size: 100px;
+.heroCover>div{
+/*    background: red;*/
+    width: 50%;
+    color:#fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heroCover i{
+    font-size: 40px;
+    margin-left:5px;
+}
+
+.heroCover i.active{
     color:yellow;
 }
+
+.heroCover p{
+    font-size: 20px;
+    margin-top: 15px;
+}
+
 
 .movieBody{
 /*    background: pink;*/

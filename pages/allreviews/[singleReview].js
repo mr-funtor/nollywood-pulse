@@ -4,6 +4,10 @@ import tempBlood from '../../assets/images/blood.jpg';
 import {useState,useEffect} from 'react'
 import {useRouter} from 'next/router';
 import Loader from '../../components/LoadingModal';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faStar
+}from "@fortawesome/free-solid-svg-icons";
 
 //firebase
 import { collection, doc, getDoc } from "firebase/firestore"; 
@@ -32,10 +36,16 @@ function singleReview(){
         <aside className={styles.reviewAside}>
             <div className={styles.imageContainer}>
                 <Image className={styles.theImage}   src={movieReview.authorImage} alt="a picture for the movie" layout="fill"/>
-              </div>
-                <p>{movieReview.author}</p>
-                <p>Rated this movie</p>
-                <i>*****</i>
+            </div>
+            <p>{movieReview.author}</p>
+            <p>Rated this movie</p>
+            <div>
+                <i className={`${movieReview.rating>=1 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                <i className={`${movieReview.rating>=2 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                <i className={`${movieReview.rating>=3 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                <i className={`${movieReview.rating>=4 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                <i className={`${movieReview.rating>=5 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+            </div>
         </aside>
             
         <article className={styles.reviewBody}>

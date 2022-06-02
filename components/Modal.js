@@ -33,7 +33,7 @@ function Modal(){
     const user=auth.currentUser;
     
    
-    async function kiki(){
+    const rateTheMovie=async()=>{
         
         if(isEditing)return updateReview()
          //check if the person is logged in
@@ -56,13 +56,21 @@ function Modal(){
             const movieDoc= doc(movRef, id);
             const hut= await addDoc(reviewsRef,review); 
             
-        
+            
             const newField= {totalratings:increment(personalRating),
                             numberOfPeopleRating:increment(1)
 //                            rating:increment(1)
                             };
             //this updates the number of people that have reviewed the movie
             await updateDoc(movieDoc,newField)
+            
+            const docRef = doc(db, "movies", id);
+            const docSnap = await getDoc(docRef); 
+//            console.log(docSnap.data().totalratings)
+            const newRating=docSnap.data().totalratings/docSnap.data().numberOfPeopleRating;
+        await updateDoc(movieDoc,{rating:newRating})
+            
+         
             
             closeAndStopRated()
         }catch(error){
@@ -74,7 +82,7 @@ function Modal(){
     
     const updateReview=async()=>{
         const reviewDoc= doc(reviewsRef, reviewId);
-        const newField= {text:theText};
+        const newField= {text:theText,rating:personalRating};
         await updateDoc(reviewDoc,newField);
         setIsEditing(false);
         closeAndStopRated();
@@ -88,7 +96,6 @@ function Modal(){
             if(user===null)return
             
         //Checks if the user has put up a review before
-       
         const q= query(reviewsRef, where('authorId','==',user.uid),where('movieId','==',id))
         const querySnapshot = await getDocs(q);
         if(querySnapshot?.docs[0]?.data()){
@@ -133,32 +140,34 @@ function Modal(){
     
     return(
         <>
-        {isOpen && (<section className={styles.modal}>
+        {isOpen && (<form onSubmit={(e)=>{e.preventDefault(),rateTheMovie()}} className={styles.modal}>
             <button onClick={()=>closeAndStopRated()}>Close</button>
         <div>
             <h1 onClick={()=>dispatch(makeRated())}>
-            <i className={isEditing && personalRating >=1 ? styles.active:''}><FontAwesomeIcon icon={faStar} /></i>
-                    <i className={rating >=2?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                    <i className={rating >=3?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                    <i className={rating >=4?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                    <i className={rating >=5?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+           
+                <i onClick={()=>setPersonalRating(1)} className={personalRating >=1 ? styles.active:''}><FontAwesomeIcon icon={faStar} /></i>
+                 <i onClick={()=>setPersonalRating(2)} className={personalRating >=2  ? styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                 <i onClick={()=>setPersonalRating(3)} className={personalRating >=3 ? styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                <i onClick={()=>setPersonalRating(4)} className={personalRating >=4 ? styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                <i onClick={()=>setPersonalRating(5)} className={personalRating >=5 ? styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
            </h1>
+        
             <textarea onChange={(e)=>setTheText(e.target.value)}
             value={theText}
-placeholder="What's your review? (optional)" maxLength="500">
+placeholder="What's your review? (optional)" maxLength="300" required>
             
             </textarea>
             
             <footer>
-                <button className={!hasRated&&!isEditing ? `${styles.inactive}` :''}
-                    onClick={()=>kiki()}
+                <button type="submit" className={!hasRated&&!isEditing ? `${styles.inactive}` :''}
+                    
                     >{isEditing ? 'Edit' : 'Post'}</button>
             </footer>
             
             
         </div>
         
-    </section>)}
+    </form>)}
     </>
     )
 }

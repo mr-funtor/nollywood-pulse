@@ -85,12 +85,12 @@ function recentCards({movie}){
                 <footer className={styles.overlayFooter}>
                     <p data-type="see">{title}</p>
                     <div>
-                        <i className={`${rating/2>=1 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={`${rating>=1 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
 
-                        <i className={`${rating/2>=2 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
-                        <i className={`${rating/2>=3 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
-                        <i className={`${rating/2>=4 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
-                        <i className={`${rating/2>=5 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={`${rating>=2 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={`${rating>=3 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={`${rating>=4 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={`${rating>=5 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
                         <p>{rating}</p>
                     </div>
                     <button onClick={()=>callers()}

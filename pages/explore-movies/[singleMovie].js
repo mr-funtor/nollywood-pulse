@@ -5,6 +5,12 @@ import tempBlood from '../../assets/images/blood.jpg';
 import styles from '../../styles/SingleMovie.module.css';
 import ReviewCard from '../../components/ReviewCard';
 import Loader from '../../components/LoadingModal';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserXmark,
+    faCaretRight,
+    faStar
+}from "@fortawesome/free-solid-svg-icons";
 
 //redux
 import {useSelector,useDispatch} from 'react-redux';
@@ -106,7 +112,16 @@ function Movie(){
               </div>
         
                  <section className={styles.heroCover}>
-                    <h1>* * * * </h1>
+                    <div>
+                        <div>
+                            <i className={movieData.rating >=1?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                            <i className={movieData.rating >=2?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                            <i className={movieData.rating >=3?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                            <i className={movieData.rating >=4?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                            <i className={movieData.rating >=5?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        </div>
+                        <p><span>{movieData.numberOfPeopleRating.toString() ||movieData.numberOfReviews.toString()} </span> review(s)</p>
+                     </div>
                 </section>
         
         

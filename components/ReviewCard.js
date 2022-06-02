@@ -1,7 +1,11 @@
 import Image from 'next/image';
 import heroPic from '../assets/images/oct.jpg';
 import styles from '../styles/ReviewCard.module.css';
-import Link from 'next/link'
+import Link from 'next/link';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faStar
+}from "@fortawesome/free-solid-svg-icons";
 
 function ReviewCard({review}){
     const {author,authorImage, movieId, movieTitle,rating,text,id}=review
@@ -21,7 +25,13 @@ function ReviewCard({review}){
                     <div className={styles.namebox}>
                        <p>Review by</p> 
                        <p>{author}</p>
-                        <i>****</i>
+                        <div>
+                            <i className={`${rating>=1 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                            <i className={`${rating>=2 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                            <i className={`${rating>=3 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                            <i className={`${rating>=4 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                            <i className={`${rating>=5 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                        </div>
                     </div>
                 </div>
                 

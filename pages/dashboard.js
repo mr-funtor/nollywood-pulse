@@ -41,7 +41,7 @@ function Dashboard(){
     year: releaseYear,
     rating:0,
     totalratings:0,
-    numberOfPeopleRating:0,
+    numberOfReviews:0,
     description:synopsis,
     producer:"",
     Director:"",
