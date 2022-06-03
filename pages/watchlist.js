@@ -63,13 +63,10 @@ function WatchListPage(){
                 <div className={styles.reviewsContainer}>
         {
             theWatchList.map((list)=>{
-        return <RecentCard key={list.id} movie={list}/>
+        return <RecentCard key={list.id} watchId={list.id} movie={list} personal={true}/>
     })
         }
-                    {/*<RecentCard />
-                    <RecentCard />
-                    <RecentCard />
-                    <RecentCard />*/}
+                
                 </div>
                 
             </section>

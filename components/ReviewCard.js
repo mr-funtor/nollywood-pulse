@@ -7,7 +7,7 @@ import {
     faStar
 }from "@fortawesome/free-solid-svg-icons";
 
-function ReviewCard({review}){
+function ReviewCard({review,personal}){
     const {author,authorImage, movieId, movieTitle,rating,text,id}=review
     return(
         <Link href={`/allreviews/${id}`}>

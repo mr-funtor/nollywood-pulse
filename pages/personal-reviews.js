@@ -74,7 +74,8 @@ function PersonalReviewsPage(){
                 <div className={styles.reviewsContainer}>
             {
                   reviewsData.map((review)=>{
-                    return <ReviewCard key={review.id} review={review}/>
+                    return <ReviewCard key={review.id} review={review}
+        personal={true}/>
                 })
                     }
                 </div>

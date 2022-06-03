@@ -16,11 +16,11 @@ import {openModal} from '../features/modalState';
 import {showing, notShowing} from '../features/popUpState';
 
 //firebase
-import {collection, doc, addDoc,updateDoc,getDoc,query,getDocs,where } from "firebase/firestore"; 
+import {collection, doc, addDoc,updateDoc,getDoc,query,getDocs,where,deleteDoc } from "firebase/firestore"; 
 import {db,auth} from '../config/firebase.config';
 
 
-function recentCards({movie}){
+function recentCards({movie,personal,watchId}){
     const router =useRouter()
     const dispatch =useDispatch();
     const {title,rating,image,id}=movie;
@@ -52,7 +52,7 @@ function recentCards({movie}){
         
         const watchDetails={
             userId:user.uid,
-            id,
+            movieId:id,
             image,
             title,
             rating
@@ -68,6 +68,16 @@ function recentCards({movie}){
     }
     
     
+    const deleteThisMovieCard=async()=>{
+        console.log(watchId)
+
+        try{
+                  await deleteDoc(doc(db, "watchlist", watchId));  
+        }catch(error){
+           console.log(error) 
+        }
+    }
+    
     return(
         <article  className={styles.singleCard} onClick={(e)=>switchToSingleMovie(e)}>
             <div className={styles.imageContainer}>
@@ -76,8 +86,10 @@ function recentCards({movie}){
             </div>
         
             <div className={styles.ratingsBox}>
+               
                 
                 <i onClick={()=>showThePopUp()}>+</i>
+                 {personal && <i onClick={()=>deleteThisMovieCard()} >X</i>}
             </div>
             
       
