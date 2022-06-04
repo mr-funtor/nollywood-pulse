@@ -1,13 +1,65 @@
 .reviewContainer{
+    position: relative;
 /*    background: pink;*/
-    width: 50%;
+    width: 100%;
     height: 100vh;
-    margin: 0 auto;
-    padding: 15vh 2vw;
+/*    margin: 0 auto;*/
+    padding: 15vh 25vw;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
+/*    justify-content: space-around;*/
     align-items: center;
     color: #fff;
+}
+
+.optionsContainer{
+/*    background: red;*/
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.optionsContainer>div{
+/*    background: pink;*/
+    position: relative;
+    right:20px;
+    min-height: 50px;
+    width: 150px;
+    border: 1px solid grey;
+}
+
+.optionsContainer>div.inactive{
+    visibility: hidden;
+}
+
+.optionsContainer>div.active{
+    visibility: visible;
+}
+
+.optionsContainer>div>button{
+    display: block;
+    width:100%;
+    height: 35px;
+    background: none;
+    color:#fff;
+    cursor: pointer;
+}
+
+.optionsContainer>i{
+    width:30px;
+    height: 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.optionsContainer>div>button:hover{
+    background: rgba(222,222,222,0.5);
+}
+
+.contentContainer{
+    display: flex;
 }
 
 .reviewAside{
@@ -33,6 +85,8 @@
     width: 100% !important;
     object-fit: cover !important;
 }
+
+
 
 .reviewAside>p:nth-child(2){
    margin-bottom: 16px; 

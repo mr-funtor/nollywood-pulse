@@ -11,10 +11,11 @@ import {
 
 //firebase
 import { collection, doc, getDoc } from "firebase/firestore"; 
-import {db} from '../../config/firebase.config';
+import {db,auth} from '../../config/firebase.config';
 
 function singleReview(){
     const [movieReview,setMovieReview]=useState(null);
+    const [seeOptions, setSeeOptions]=useState(false);
     const router=useRouter();
     
     
@@ -29,33 +30,48 @@ function singleReview(){
         fetchMovie()
         },[])
     
+    const dismissTheOptions=(e)=>{
+        if(e.target.dataset.type!=='options')setSeeOptions(false)
+    }
+    
     if(movieReview===null)return <Loader/>
     
     return(
-    <section className={styles.reviewContainer}>
-        <aside className={styles.reviewAside}>
-            <div className={styles.imageContainer}>
-                <Image className={styles.theImage}   src={movieReview.authorImage} alt="a picture for the movie" layout="fill"/>
+    <section onClick={(e)=>dismissTheOptions(e)}className={styles.reviewContainer}>
+        <section className={styles.optionsContainer}>
+            <div className={`${!seeOptions ? styles.inactive : styles.active}`}>
+                <button>Edit Review</button>
+                <button>Delete Review</button>
             </div>
-            <p>{movieReview.author}</p>
-            <p>Rated this movie</p>
-            <div>
-                <i className={`${movieReview.rating>=1 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
-                <i className={`${movieReview.rating>=2 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
-                <i className={`${movieReview.rating>=3 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
-                <i className={`${movieReview.rating>=4 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
-                <i className={`${movieReview.rating>=5 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
-            </div>
-        </aside>
-            
-        <article className={styles.reviewBody}>
-            <h1>{movieReview.movieTitle}</h1>
-            
-            <p>{movieReview.text}</p>
-            
-            {/*<button> Check Another Review</button>*/}
-            
-        </article>
+            {auth?.currentUser?.uid!==movieReview.authorId  && 
+            <i  data-type="options" onClick={()=>setSeeOptions(!seeOptions)} className={styles.ellips}>:</i>}
+        </section>
+        
+        <div className={styles.contentContainer}>
+            <aside className={styles.reviewAside}>
+                <div className={styles.imageContainer}>
+                    <Image className={styles.theImage}   src={movieReview.authorImage} alt="a picture for the movie" layout="fill"/>
+                </div>
+                <p>{movieReview.author}</p>
+                <p>Rated this movie</p>
+                <div>
+                    <i className={`${movieReview.rating>=1 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={`${movieReview.rating>=2 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={`${movieReview.rating>=3 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={`${movieReview.rating>=4 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                    <i className={`${movieReview.rating>=5 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
+                </div>
+            </aside>
+
+            <article className={styles.reviewBody}>
+                <h1>{movieReview.movieTitle}</h1>
+
+                <p>{movieReview.text}</p>
+
+                {/*<button> Check Another Review</button>*/}
+
+            </article>
+        </div>
     </section>
     ) 
 }
