@@ -9,6 +9,11 @@ import {
     faStar
 }from "@fortawesome/free-solid-svg-icons";
 
+//redux
+import {useSelector,useDispatch} from 'react-redux';
+import {fillMovieId} from '../../features/ratingState';
+import {openModal} from '../../features/modalState';
+
 //firebase
 import { collection, doc, getDoc } from "firebase/firestore"; 
 import {db,auth} from '../../config/firebase.config';
@@ -17,6 +22,7 @@ function singleReview(){
     const [movieReview,setMovieReview]=useState(null);
     const [seeOptions, setSeeOptions]=useState(false);
     const router=useRouter();
+    const dispatch= useDispatch();
     
     
     useEffect(()=>{
@@ -30,22 +36,31 @@ function singleReview(){
         fetchMovie()
         },[])
     
+    //this closes the options popup when you click on the body of the screen
     const dismissTheOptions=(e)=>{
         if(e.target.dataset.type!=='options')setSeeOptions(false)
+    }
+    
+    const openTheReviewModal=()=>{
+        dispatch(openModal());//opens the modal
+        dispatch(fillMovieId({id:movieReview.movieId,title:movieReview.movieTitle})) //this puts the id of the movie into state , for reveiw 
     }
     
     if(movieReview===null)return <Loader/>
     
     return(
     <section onClick={(e)=>dismissTheOptions(e)}className={styles.reviewContainer}>
+            
+       {auth?.currentUser?.uid===movieReview.authorId  && 
         <section className={styles.optionsContainer}>
             <div className={`${!seeOptions ? styles.inactive : styles.active}`}>
-                <button>Edit Review</button>
+                <button onClick={()=>openTheReviewModal()}>Edit Review</button>
                 <button>Delete Review</button>
             </div>
-            {auth?.currentUser?.uid!==movieReview.authorId  && 
-            <i  data-type="options" onClick={()=>setSeeOptions(!seeOptions)} className={styles.ellips}>:</i>}
+            
+            <i  data-type="options" onClick={()=>setSeeOptions(!seeOptions)} className={styles.ellips}>:</i>
         </section>
+       }
         
         <div className={styles.contentContainer}>
             <aside className={styles.reviewAside}>

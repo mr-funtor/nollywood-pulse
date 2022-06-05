@@ -35,10 +35,10 @@ function Modal(){
    
     const rateTheMovie=async()=>{
         
-        if(isEditing)return updateReview()
-         //check if the person is logged in
+        if(isEditing)return updateReview()//calls this if the person has reviewed the movie before
+         
         
-        if(user===null)return router.push('/signin')
+        if(user===null)return router.push('/signin')//check if the person is logged in
         
         const review={
             author:user.displayName,
@@ -93,7 +93,7 @@ function Modal(){
         async function lala(){
             const reviewsRef=collection(db, 'reviews');
     const user=auth.currentUser;
-            if(user===null)return
+            if(user===null)return //this prevents any review if the user is not logged in
             
         //Checks if the user has put up a review before
         const q= query(reviewsRef, where('authorId','==',user.uid),where('movieId','==',id))
