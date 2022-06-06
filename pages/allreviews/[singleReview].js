@@ -15,7 +15,7 @@ import {fillMovieId} from '../../features/ratingState';
 import {openModal} from '../../features/modalState';
 
 //firebase
-import { collection, doc, getDoc } from "firebase/firestore"; 
+import { collection, doc, getDoc,deleteDoc } from "firebase/firestore"; 
 import {db,auth} from '../../config/firebase.config';
 
 function singleReview(){
@@ -30,7 +30,7 @@ function singleReview(){
             const singleReview= router.query.singleReview;
             const docRef = doc(db, "reviews", singleReview);
            const docSnap = await getDoc(docRef); 
-            setMovieReview(docSnap.data())
+            setMovieReview({id:docSnap.id,...docSnap.data()})
         
         }
         fetchMovie()
@@ -46,6 +46,16 @@ function singleReview(){
         dispatch(fillMovieId({id:movieReview.movieId,title:movieReview.movieTitle})) //this puts the id of the movie into state , for reveiw 
     }
     
+    const deleteThisReview=async()=>{
+//    console.log(movieReview.id)
+        try{
+                  await deleteDoc(doc(db, "reviews", movieReview.id));
+            router.back()
+        }catch(error){
+           console.log(error) 
+        }
+    }
+    
     if(movieReview===null)return <Loader/>
     
     return(
@@ -55,7 +65,7 @@ function singleReview(){
         <section className={styles.optionsContainer}>
             <div className={`${!seeOptions ? styles.inactive : styles.active}`}>
                 <button onClick={()=>openTheReviewModal()}>Edit Review</button>
-                <button>Delete Review</button>
+                <button onClick={()=>deleteThisReview()}>Delete Review</button>
             </div>
             
             <i  data-type="options" onClick={()=>setSeeOptions(!seeOptions)} className={styles.ellips}>:</i>

@@ -20,7 +20,7 @@ import {showing, notShowing} from '../../features/popUpState';
 
 
 //firebase
-import { collection, doc, getDoc,query,getDocs,where } from "firebase/firestore"; 
+import { collection, doc, getDoc,addDoc,query,getDocs,where } from "firebase/firestore"; 
 import {auth,db} from '../../config/firebase.config';
 
 function Movie(){
@@ -43,6 +43,7 @@ function Movie(){
             const watchlistRef=collection(db, 'watchlist');
             const q= query(watchlistRef, where('userId','==',user.uid),where('id','==',movieData.id))
         const querySnapshot = await getDocs(q);
+            
         if(querySnapshot?.docs[0]?.data()){
             dispatch(showing('Movie already in watchlist'));
             return setTimeout(()=>{
