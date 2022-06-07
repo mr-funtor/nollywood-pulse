@@ -5,7 +5,7 @@ import {
   faHouse
 } from "@fortawesome/free-solid-svg-icons";
 
-function Navbar(){
+function Modal(){
     
     return(
 <section className={styles.spinnerContainer}>
@@ -16,4 +16,4 @@ function Navbar(){
     )
 }
 
-export default Navbar;
+export default Modal;

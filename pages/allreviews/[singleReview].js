@@ -4,10 +4,12 @@ import tempBlood from '../../assets/images/blood.jpg';
 import {useState,useEffect} from 'react'
 import {useRouter} from 'next/router';
 import Loader from '../../components/LoadingModal';
+import DeleteModal from '../../components/DeleteModal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faStar
 }from "@fortawesome/free-solid-svg-icons";
+
 
 //redux
 import {useSelector,useDispatch} from 'react-redux';
@@ -21,6 +23,7 @@ import {db,auth} from '../../config/firebase.config';
 function singleReview(){
     const [movieReview,setMovieReview]=useState(null);
     const [seeOptions, setSeeOptions]=useState(false);
+    const [showModal, setShowModal]= useState(false);
     const router=useRouter();
     const dispatch= useDispatch();
     
@@ -61,11 +64,13 @@ function singleReview(){
     return(
     <section onClick={(e)=>dismissTheOptions(e)}className={styles.reviewContainer}>
             
+       { showModal && <DeleteModal deleteThisReview={deleteThisReview} setShowModal={setShowModal}/>}
+        
        {auth?.currentUser?.uid===movieReview.authorId  && 
         <section className={styles.optionsContainer}>
             <div className={`${!seeOptions ? styles.inactive : styles.active}`}>
                 <button onClick={()=>openTheReviewModal()}>Edit Review</button>
-                <button onClick={()=>deleteThisReview()}>Delete Review</button>
+                <button onClick={()=>setShowModal(true)}>Delete Review</button>
             </div>
             
             <i  data-type="options" onClick={()=>setSeeOptions(!seeOptions)} className={styles.ellips}>:</i>

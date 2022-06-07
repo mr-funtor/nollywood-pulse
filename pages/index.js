@@ -55,7 +55,7 @@ export default function Home() {
             const q2= query(reviewRef, limit(6) )
             const packedReviews= await getDocs(q2);
             const reviewsData=packedReviews.docs.map((doc) => {
-                console.log({...doc.data()})
+                
               return  {id:doc.id,...doc.data()}
             })
             
