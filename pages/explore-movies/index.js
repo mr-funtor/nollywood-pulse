@@ -14,7 +14,7 @@ import {switcher} from '../../features/navState';
 import { collection, getDocs } from "firebase/firestore"; 
 import {db} from '../../config/firebase.config';
 
-function allMoviesPage(){
+function AllMoviesPage(){
     const [allmovies, setAllMovies]=useState([])
      const modalState= useSelector((state)=>state.modal)
     const dispatch=useDispatch()
@@ -71,4 +71,4 @@ function allMoviesPage(){
     )
 }
 
-export default allMoviesPage;
+export default AllMoviesPage;

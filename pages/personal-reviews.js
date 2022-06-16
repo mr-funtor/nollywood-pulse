@@ -20,7 +20,6 @@ function PersonalReviewsPage(){
     
     
     useEffect(()=>{
-        console.log('out reviews')
         //this changes the color of the nav items in the side bar
         dispatch(switcher('Your'));
         
@@ -32,7 +31,6 @@ function PersonalReviewsPage(){
         }
         
          const getMovies=async()=>{
-             console.log('reviews')
             const user= auth.currentUser;
            
             try{
@@ -58,7 +56,7 @@ function PersonalReviewsPage(){
          
          getMovies()
         
-    },[])
+    },[reviewsData])
     
     
     if(reviewsData===null)return <Loader/>;

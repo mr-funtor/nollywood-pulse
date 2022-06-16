@@ -6,7 +6,7 @@ import {useRouter} from 'next/router';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faStar,
-    faDeleteLeft
+    faTrash
 }from "@fortawesome/free-solid-svg-icons";
 
 //redux
@@ -21,7 +21,7 @@ import {collection, doc, addDoc,updateDoc,getDoc,query,getDocs,where,deleteDoc }
 import {db,auth} from '../config/firebase.config';
 
 
-function recentCards({movie,personal,watchId, setShowModal, settingDeleteId}){
+function RecentCards({movie,personal,watchId, setShowModal, settingDeleteId}){
     const router =useRouter()
     const dispatch =useDispatch();
     const {title,rating,image,id}=movie;
@@ -95,7 +95,7 @@ function recentCards({movie,personal,watchId, setShowModal, settingDeleteId}){
                
                 
                 <i onClick={()=>showThePopUp()}>+</i>
-                 {personal && <i onClick={()=>openModalAndSetId()} >X</i>}
+                 {personal && <i onClick={()=>openModalAndSetId()} ><FontAwesomeIcon icon={faTrash} /></i>}
             </div>
             
       
@@ -118,4 +118,4 @@ function recentCards({movie,personal,watchId, setShowModal, settingDeleteId}){
     )
 }
 
-export default recentCards;
+export default RecentCards;

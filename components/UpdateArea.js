@@ -22,7 +22,7 @@ function UpdateComponent({uploadMovieDetails,synopsis, setSynopsis,releaseYear, 
             
             <div>
                 <label htmlFor="poster">Upload Poster Image</label>
-                <input id="poster" type="file" id="movie" name="movie" accept="image/png, image/jpeg" 
+                <input id="poster" type="file" name="poster" accept="image/png, image/jpeg" 
                 
                 onChange={(e)=>takeHoldOfImage(e.target.files[0])}
         required/>

@@ -101,7 +101,7 @@ function Movie(){
         
         fetchMovie()
 //        console.log(movieData)
-    },[])
+    },[router.query.singleMovie])
     
     if(movieData===null || reviewsData===null)return <Loader/>
     
@@ -132,7 +132,7 @@ function Movie(){
                 <div className={styles.movieBodyTop}>
                     <h1>{movieData.title.toUpperCase()}</h1>
                     <div className={styles.actionArea}>
-                        <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank"><button>Watch Trailer <i>></i></button></a>
+                        <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer"><button>Watch Trailer <i>&gt;</i></button></a>
                         
                         <b onClick={()=>callers()}>Give Review/Rating</b>
                         

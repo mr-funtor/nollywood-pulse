@@ -6,7 +6,7 @@ import {useSelector,useDispatch} from 'react-redux';
 import {showing,notShowing} from '../../features/popUpState';
 
 
-function popUp(){
+function PopUp(){
 //    const [message,setMessage]=useState('Movie added to watchlist')
     const {isPoped,message}=useSelector((state)=>state.popUp);
     
@@ -23,4 +23,4 @@ function popUp(){
     ) 
 }
 
-export default popUp;
+export default PopUp;

@@ -60,7 +60,7 @@ function WatchListPage(){
         }
         
         getWatchlist()
-    },[])
+    },[loginState])
     
     const deleteAWatchlist=async()=>{
 //    console.log(movieReview.id)

@@ -72,7 +72,8 @@
     margin-right: 30px
 }
 
-.reviewAside>div:not(div:nth-child(4)){
+/*.reviewAside>div:not(div:nth-child(4)){*/
+.reviewAside>.imageContainer{
     background: yellow;
     position: relative;
     height: 150px;
@@ -127,4 +128,31 @@
     line-height: 180%;
 }
 
+
+@media (max-width:800px){
+    .reviewContainer{
+        padding: 15vh 8vw;
+    }
+    
+    .contentContainer{
+        display: flex;
+/*        flex-direction: column;*/
+        flex-direction: column-reverse;
+    }
+    
+    .reviewBody{
+/*    .reviewAside{*/
+        margin-bottom: 40px;
+    }
+    
+    .reviewBody h1{
+        text-align: center;
+    }
+    
+    .reviewAside>.imageContainer{
+        height: 60px;
+        width: 60px;
+    }
+    
+}
 

@@ -23,7 +23,7 @@ import { collection, doc, getDoc,deleteDoc } from "firebase/firestore";
 import {db,auth} from '../../config/firebase.config';
 
 
-function singleReview(){
+function SingleReview(){
     const [movieReview,setMovieReview]=useState(null);
     const [seeOptions, setSeeOptions]=useState(false);
     const [showModal, setShowModal]= useState(false);
@@ -40,7 +40,7 @@ function singleReview(){
         
         }
         fetchMovie()
-        },[])
+        },[router.query.singleReview])
     
     //this closes the options popup when you click on the body of the screen
     const dismissTheOptions=(e)=>{
@@ -109,4 +109,4 @@ function singleReview(){
     ) 
 }
 
-export default singleReview;
+export default SingleReview;

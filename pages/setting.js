@@ -15,7 +15,8 @@ function Setting(){
     const [name, setName]=useState(user.providerData[0].displayName)
     const [email, setEmail]=useState(user.providerData[0].email);
     const  dispatch= useDispatch();
-    const router= useRouter()
+    const router= useRouter();
+    const [static,setStatic]=useState(null)
     
     //if the user is not logged in, the user is redirected to a signin page
     const loginState= useSelector((state)=>state.login);
@@ -36,7 +37,7 @@ function Setting(){
         if(user === null)return router.push('/signin');
         
         
-    },[])
+    },[static])
     
     
     return(

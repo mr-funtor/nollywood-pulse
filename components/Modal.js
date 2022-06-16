@@ -90,24 +90,24 @@ function Modal(){
     
     useEffect(()=>{
         
-        async function lala(){
+        async function CheckForUserReview(){
             const reviewsRef=collection(db, 'reviews');
-    const user=auth.currentUser;
+            const user=auth.currentUser;
             if(user===null)return //this prevents any review if the user is not logged in
             
-        //Checks if the user has put up a review before
-        const q= query(reviewsRef, where('authorId','==',user.uid),where('movieId','==',id))
-        const querySnapshot = await getDocs(q);
-        if(querySnapshot?.docs[0]?.data()){
-            setTheText(querySnapshot.docs[0].data().text);
-            setPersonalRating(querySnapshot.docs[0].data().rating);
-            setReviewId(querySnapshot.docs[0].id)
-            
-            setIsEditing(true);
+            //Checks if the user has put up a review before
+            const q= query(reviewsRef, where('authorId','==',user.uid),where('movieId','==',id))
+            const querySnapshot = await getDocs(q);
+            if(querySnapshot?.docs[0]?.data()){
+                setTheText(querySnapshot.docs[0].data().text);
+                setPersonalRating(querySnapshot.docs[0].data().rating);
+                setReviewId(querySnapshot.docs[0].id)
+
+                setIsEditing(true);
+            }
+
         }
-            
-        }
-        lala()
+        CheckForUserReview()
         
         
         //this closes the modal when the page changes

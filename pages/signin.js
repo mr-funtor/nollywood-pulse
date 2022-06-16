@@ -10,7 +10,7 @@ import {auth} from '../config/firebase.config';
 import { useSelector,useDispatch} from 'react-redux';
 import {switcher} from '../features/navState';
 
-function signinPage(){
+function SigninPage(){
     const router= useRouter();
     const loginState= useSelector((state)=>state.login);
     
@@ -20,7 +20,7 @@ function signinPage(){
     useEffect(()=>{
          //this changes the color of the nav items in the side bar
         dispatch(switcher('Login'));
-    },[])
+    },[loginState])
     
     //this takes the page they were previuosly on if they are already logged in
 //    if(loginState)return router.back();
@@ -59,4 +59,4 @@ function signinPage(){
     ) 
 }
 
-export default signinPage
+export default SigninPage

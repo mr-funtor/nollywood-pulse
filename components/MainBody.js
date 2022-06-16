@@ -29,7 +29,7 @@ export default function Home() {
           ndnlkn sndnl dnlfdnlsjdouf dkljlfdjld dljlfjdojl jdojojfodjf
           ndnlkn sndnl dnlfdnls</p>
 
-            <button>Watch Trailer <i>></i></button>
+            <button>Watch Trailer <i>&gt;</i></button>
         </div>
       
         <div className={styles.floater}>

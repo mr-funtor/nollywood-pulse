@@ -72,7 +72,7 @@ export default function Home() {
 
         getMovies()
         
-    },[]) 
+    },[allmovies]) 
     
     if(allmovies.length===0)return <Loader/>
     
@@ -101,7 +101,7 @@ export default function Home() {
             <p>{allmovies[0].description}
           ndnlkn sndnl dnlfdnls</p>
 
-            <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank"><button>Watch Trailer <i>
+            <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer"><button>Watch Trailer <i>
             <FontAwesomeIcon icon={faCaretRight} />
       </i></button></a>
         </div>
