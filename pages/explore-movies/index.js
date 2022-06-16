@@ -43,7 +43,7 @@ function AllMoviesPage(){
 
         getMovies()
         
-    },[]) 
+    },[dispatch]) 
     
      
      if(allmovies.length===0)return <Loader/>

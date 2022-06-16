@@ -56,7 +56,7 @@ function PersonalReviewsPage(){
          
          getMovies()
         
-    },[reviewsData])
+    },[reviewsData,dispatch,loginState,router])
     
     
     if(reviewsData===null)return <Loader/>;

@@ -125,7 +125,7 @@ function Modal(){
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
     }
-    },[isOpen])
+    },[isOpen,dispatch,id router.events])
     
     const closeAndStopRated=()=>{
            setIsEditing(false);

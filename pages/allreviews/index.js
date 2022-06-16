@@ -44,7 +44,7 @@ function AllReviewsPage(){
 
         getMovies()
         
-    },[]) 
+    },[dispatch]) 
     
     if(allreviews===null)return <Loader/>
         

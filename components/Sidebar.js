@@ -58,7 +58,7 @@ function Sidebar(){
         console.log('no user')
     }
 }) 
-    },[loginState])
+    },[loginState,dispatch])
     
 //signs out the user form the app
    const  LoginOrOut=()=>{

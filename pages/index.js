@@ -72,7 +72,7 @@ export default function Home() {
 
         getMovies()
         
-    },[allmovies]) 
+    },[allmovies,dispatch]) 
     
     if(allmovies.length===0)return <Loader/>
     

@@ -20,7 +20,7 @@ function SigninPage(){
     useEffect(()=>{
          //this changes the color of the nav items in the side bar
         dispatch(switcher('Login'));
-    },[loginState])
+    },[loginState,dispatch])
     
     //this takes the page they were previuosly on if they are already logged in
 //    if(loginState)return router.back();
