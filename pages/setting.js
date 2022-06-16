@@ -36,7 +36,7 @@ function Setting(){
         if(user === null)return router.push('/signin');
         
         
-    },[dispatch,router,loginState])
+    },[dispatch,router,loginState,user])
     
     
     return(
