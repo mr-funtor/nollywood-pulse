@@ -8,7 +8,7 @@ import {
 function Modal({deleteThisReview, setShowModal}){
     
     return(
-        <section className={styles.modalContainer}>
+        <section id={styles.modalContainer}>
            
                <h2>Are you sure you want to delete?</h2>
                 

@@ -43,7 +43,7 @@
     top:50%;
     transform: translateY(-50%);
     color:#fff;
-    
+    display: none;
 }
 
 .floater ul{
@@ -90,7 +90,7 @@
 .coverTop i{
     display: flex;
     font-size: 30px;
-    color: #fff;
+    color: darkgrey;
     margin-right: 5px;
 }
 

@@ -3,13 +3,15 @@ import Image from 'next/image';
 import tempBlood from '../../assets/images/blood.jpg';
 import {useState,useEffect} from 'react'
 import {useRouter} from 'next/router';
-import Loader from '../../components/LoadingModal';
-import DeleteModal from '../../components/DeleteModal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faStar
+    faStar,
+    faEllipsisV
 }from "@fortawesome/free-solid-svg-icons";
 
+//components
+import Loader from '../../components/LoadingModal';
+import DeleteModal from '../../components/DeleteModal';
 
 //redux
 import {useSelector,useDispatch} from 'react-redux';
@@ -19,6 +21,7 @@ import {openModal} from '../../features/modalState';
 //firebase
 import { collection, doc, getDoc,deleteDoc } from "firebase/firestore"; 
 import {db,auth} from '../../config/firebase.config';
+
 
 function singleReview(){
     const [movieReview,setMovieReview]=useState(null);
@@ -73,7 +76,7 @@ function singleReview(){
                 <button onClick={()=>setShowModal(true)}>Delete Review</button>
             </div>
             
-            <i  data-type="options" onClick={()=>setSeeOptions(!seeOptions)} className={styles.ellips}>:</i>
+            <p  data-type="options" onClick={()=>setSeeOptions(!seeOptions)} className={styles.ellips}>:</p>
         </section>
        }
         

@@ -20,7 +20,7 @@ import {collection, doc, addDoc,updateDoc,getDoc,query,getDocs,where,deleteDoc }
 import {db,auth} from '../config/firebase.config';
 
 
-function recentCards({movie,personal,watchId}){
+function recentCards({movie,personal,watchId, setShowModal, settingDeleteId}){
     const router =useRouter()
     const dispatch =useDispatch();
     const {title,rating,image,id}=movie;
@@ -78,6 +78,11 @@ function recentCards({movie,personal,watchId}){
         }
     }
     
+    const openModalAndSetId=()=>{
+        setShowModal(true);
+        settingDeleteId(watchId)
+    }
+    
     return(
         <article  className={styles.singleCard} onClick={(e)=>switchToSingleMovie(e)}>
             <div className={styles.imageContainer}>
@@ -89,7 +94,7 @@ function recentCards({movie,personal,watchId}){
                
                 
                 <i onClick={()=>showThePopUp()}>+</i>
-                 {personal && <i onClick={()=>deleteThisMovieCard()} >X</i>}
+                 {personal && <i onClick={()=>openModalAndSetId()} >X</i>}
             </div>
             
       

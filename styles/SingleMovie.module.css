@@ -39,6 +39,7 @@
 .heroCover i{
     font-size: 40px;
     margin-left:5px;
+    color:darkgray;
 }
 
 .heroCover i.active{

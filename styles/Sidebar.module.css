@@ -57,6 +57,11 @@
     margin-right: 6px;
 }
 
+.sideList{
+    padding: 3px;
+    margin-bottom: 5px;
+}
+
 .active{
     text-decoration: none;
     color:darkgray;

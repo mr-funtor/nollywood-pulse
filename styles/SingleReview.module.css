@@ -47,11 +47,14 @@
     cursor: pointer;
 }
 
-.optionsContainer>i{
+.ellips{
     width:30px;
     height: 30px;
     cursor: pointer;
     text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    
 }
 
 .optionsContainer>div>button:hover{
@@ -103,6 +106,10 @@
 }
 */
 
+.reviewAside i{
+    color: darkgrey;
+}
+
 .reviewAside i.active{
     color: orange;
 }
@@ -119,3 +126,5 @@
 .reviewBody>p{
     line-height: 180%;
 }
+
+

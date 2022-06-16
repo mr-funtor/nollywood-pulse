@@ -4,7 +4,7 @@ import {useState,useEffect} from 'react';
 import {useRouter} from 'next/router';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUserXmark,
+  faXmark,
     faCaretRight,
     faStar
 }from "@fortawesome/free-solid-svg-icons";
@@ -141,7 +141,7 @@ function Modal(){
     return(
         <>
         {isOpen && (<form onSubmit={(e)=>{e.preventDefault(),rateTheMovie()}} className={styles.modal}>
-            <button onClick={()=>closeAndStopRated()}>Close</button>
+            <i className={styles.closingButton} onClick={()=>closeAndStopRated()}><FontAwesomeIcon icon={faXmark} /></i>
         <div>
             <h1 onClick={()=>dispatch(makeRated())}>
            

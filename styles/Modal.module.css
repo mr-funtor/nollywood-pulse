@@ -11,10 +11,13 @@
     align-items: center;
 }
 
-.modal>button{
+.closingButton{
     position: absolute;
     top:20px;
     right:40px;
+    color:#fff;
+    cursor: pointer;
+    padding: 5px;
 }
 
 .modal>div{
@@ -31,7 +34,7 @@
 }
 
 .modal>div>h1 i{
-    color:#fff;
+    color:darkgrey;
 }
 
 .modal>div>h1 i.active{

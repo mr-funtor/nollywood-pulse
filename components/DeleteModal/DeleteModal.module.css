@@ -1,4 +1,4 @@
-.modalContainer{
+#modalContainer{
     background: rgba(0,0,0,0.85);
     position: fixed;
     top:0;
@@ -12,7 +12,7 @@
     z-index: 5;
 }
 
-.modalContainer>h2{
+#modalContainer>h2{
     margin-bottom: 50px;
 }
 

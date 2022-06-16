@@ -51,6 +51,7 @@
 .overlayFooter i{
     font-size: 15px;
     margin-right: 10px;
+    color:darkgrey;
 }
 
 .overlayFooter i.active{

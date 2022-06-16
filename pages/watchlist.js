@@ -1,21 +1,27 @@
 import {useState,useEffect} from 'react';
 import styles from '../styles/PersonalReviews.module.css';
-import RecentCard from '../components/RecentCard';
 import {useRouter} from 'next/router';
+
+//components
+import RecentCard from '../components/RecentCard';
 import Loader from '../components/LoadingModal';
+import DeleteModal from '../components/DeleteModal';
 
 //redux
 import {useSelector} from 'react-redux';
 import {switcher} from '../features/navState';
 
 //firebase
-import {collection, doc, addDoc,updateDoc,getDoc,query,getDocs,where } from "firebase/firestore"; 
+import {collection, doc, addDoc,updateDoc,getDoc,query,getDocs,where,deleteDoc,onSnapshot } from "firebase/firestore"; 
 import {db,auth} from '../config/firebase.config';
+
 
 function WatchListPage(){
     const [theWatchList, setTheWatchList]=useState(null);
     const router= useRouter();
     const loginState= useSelector((state)=>state.login);
+    const [showModal, setShowModal]= useState(false);
+    const [pendingDeleteId, setPendingDeleteId]=useState('')
     
     useEffect(()=>{
         
@@ -30,18 +36,18 @@ function WatchListPage(){
            
             try{
             
-            //get all the watchlist for the user
-            const watchlistRef=collection(db, "watchlist");
-            const q = query(watchlistRef, where("userId", "==", user.uid));
-                
-            const packedwatch= await getDocs(q);
-            const watchData=packedwatch.docs.map((doc) => {
-            
-              return  {id:doc.id,...doc.data()}
-            })
-            
-         
-        setTheWatchList(watchData)
+                //get all the watchlist for the user
+                const watchlistRef=collection(db, "watchlist");
+                const q = query(watchlistRef, where("userId", "==", user.uid));
+
+                const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                  const watchData = [];
+                  querySnapshot.forEach((doc) => {
+                      watchData.push({id:doc.id,...doc.data()});
+                  });
+                    setTheWatchList(watchData)
+                });
+
                 
             }catch(error){
                 console.log(error)
@@ -52,20 +58,44 @@ function WatchListPage(){
         getWatchlist()
     },[])
     
+    const deleteAWatchlist=async()=>{
+//    console.log(movieReview.id)
+        console.log(pendingDeleteId)
+
+        try{
+                  await deleteDoc(doc(db, "watchlist", pendingDeleteId));
+                setShowModal(false);
+        }catch(error){
+           console.log(error) 
+        }
+    }
+    
+    const settingDeleteId=(id)=>{
+        setPendingDeleteId(id)
+    }
+    
     
      if(theWatchList===null)return <Loader/>;
     
     return(
         <section className={styles.pageContainer}>
+        { showModal && <DeleteModal deleteThisReview={deleteAWatchlist} setShowModal={setShowModal}/>}
+        
             <section id={styles.pageSection}>
                 <h1>Your Watchlist</h1>
                 
                 <div className={styles.reviewsContainer}>
-        {
-            theWatchList.map((list)=>{
-        return <RecentCard key={list.id} watchId={list.id} movie={list} personal={true}/>
-    })
-        }
+                {
+                    theWatchList.map((list)=>{
+                        return <RecentCard 
+                                   key={`${list.id}${Math.random().toString()}`} 
+                                   watchId={list.id} 
+                                   movie={list} 
+                                   personal={true} 
+                                   settingDeleteId={settingDeleteId}
+                                   setShowModal={setShowModal}/>
+                    })
+                }
                 
                 </div>
                 

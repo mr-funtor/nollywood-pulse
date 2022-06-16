@@ -5,7 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserXmark,
     faBars,
-    faXmark
+    faXmark,
+    faHome,
+    faMessage,
+    faPhotoFilm,
+    faReceipt,
+    faPlus,
+    faBolt,
+    faGear,
+    faDoorClosed
 }from "@fortawesome/free-solid-svg-icons";
 import {useRouter} from 'next/router';
 
@@ -81,23 +89,23 @@ function Sidebar(){
         <div className={styles.categoriesBox}>    
             <section>
                 <h3>MENU</h3>
-                    <div>
-                        <i>*</i>
+                    <div className={styles.sideList}>
+                        <i><FontAwesomeIcon icon={faHome} /></i>
                         <Link href='/'>
                             <a className={navState==='Home' ? styles.active : ''}>Home</a>
                         </Link>
                     </div>
 
-                    <div>
-                        <i>*</i>
+                    <div className={styles.sideList}>
+                        <i><i><FontAwesomeIcon icon={faMessage} /></i></i>
                         <Link href='/allreviews'>
                             <a
                                 className={navState==='Reviews' ? styles.active : ''}>Reviews</a>
                         </Link>
                     </div>
 
-                    <div>
-                        <i>*</i>
+                    <div className={styles.sideList}>
+                        <i><FontAwesomeIcon icon={faPhotoFilm} /></i>
                         <Link href='/explore-movies'>
                             <a
                                 className={navState==='Explore' ? styles.active : ''}>Explore Movies</a>
@@ -108,15 +116,15 @@ function Sidebar(){
 
             <section>
                 <h3>DASHBOARD</h3>
-                    <div>
-                        <i>*</i>
+                    <div className={styles.sideList}>
+                        <i><FontAwesomeIcon icon={faReceipt} /></i>
                         <Link href='/personal-reviews'>
                             <a className={navState==='Your' ? styles.active : ''}>Your Reviews</a>
                         </Link>
                     </div>
 
-                    <div>
-                        <i>*</i>
+                    <div className={styles.sideList}>
+                        <i><FontAwesomeIcon icon={faPlus} /></i>
                         <Link href='/watchlist'>
                             <a className={navState==='watch' ? styles.active : ''}>Watchlist</a>
                         </Link>
@@ -126,8 +134,8 @@ function Sidebar(){
 
             <section >
                 <h3>GENERAL</h3>
-                    <div>
-                        <i>*</i>
+                    <div className={styles.sideList}>
+                        <i><FontAwesomeIcon icon={faGear} /></i>
                         <Link href='/setting'>
                             <a
                                 className={navState==='Setting' ? styles.active : ''}
@@ -135,8 +143,8 @@ function Sidebar(){
                         </Link>
                     </div>
 
-                    <div>
-                        <i>*</i>
+                    <div className={styles.sideList}>
+                        <i><FontAwesomeIcon icon={faDoorClosed} /></i>
                         
                             <a onClick={()=>LoginOrOut()} className={navState==='Login' ? styles.active : ''}>{loginState ? 'Logout' : 'Login'}</a>
                         
