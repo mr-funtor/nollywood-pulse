@@ -1,16 +1,27 @@
 import {useState, useEffect} from 'react';
 import styles from '../../styles/PersonalReviews.module.css';
+
+//components
 import ReviewCard from '../../components/ReviewCard';
 import Loader from '../../components/LoadingModal';
+
+//redux
+import {useDispatch} from 'react-redux';
+import {switcher} from '../../features/navState';
 
 //firebase
 import { collection, getDocs } from "firebase/firestore"; 
 import {db} from '../../config/firebase.config';
 
+
 function AllReviewsPage(){
     const [allreviews, setAllReviews]=useState([]);
+    const dispatch= useDispatch();
     
     useEffect(()=>{
+        //this changes the color of the nav items in the side bar
+        dispatch(switcher('Reviews'))
+        
         const getMovies=async()=>{
             
             try{

@@ -23,7 +23,6 @@
 
 
 .pageContainer>section>h1{
-    
     font-size: 50px;
     text-align: center;
 }
@@ -40,4 +39,13 @@
    .reviewsContainer{
         justify-content: center;
     } 
+    
+}
+
+@media (max-width:800px){
+    .pageContainer>section,
+    #pageSection{
+        width:90%;
+    }
+    
 }

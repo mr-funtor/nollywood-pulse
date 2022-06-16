@@ -6,22 +6,36 @@ import {useRouter} from 'next/router';
 import {useDispatch,useSelector} from 'react-redux';
 import {switcher} from '../features/navState';
 
+//firebase
+import {db,auth} from '../config/firebase.config';
+
+
 function Setting(){
-    const [name, setName]=useState('Charles')
-    const [email, setEmail]=useState('guan@gmail');
+    const user=auth.currentUser;
+    const [name, setName]=useState(user.providerData[0].displayName)
+    const [email, setEmail]=useState(user.providerData[0].email);
     const  dispatch= useDispatch();
     const router= useRouter()
     
     //if the user is not logged in, the user is redirected to a signin page
     const loginState= useSelector((state)=>state.login);
     
-    //this changes the color of the nav items in the side bar
+    
+   
     useEffect(()=>{
+         //this changes the color of the nav items in the side bar
         dispatch(switcher('Setting'));
+        
+        //check if the user is logged in
         if(!loginState){
-        router.push('/signin')
-        return
-    }
+            router.push('/signin')
+            return
+        }
+        
+        
+        if(user === null)return router.push('/signin');
+        
+        
     },[])
     
     
@@ -33,19 +47,18 @@ function Setting(){
                 <div>
                     <label htmlFor="name">Name</label>
                     <input type="text" id="name" value={name}
-                        onChange={(e)=>setName(e.target.value)}/>
+                       onChange={(e)=>setName(e.target.value)} />
                 </div>
                 
                 <div>
                     <label htmlFor="name">Email</label>
-                    <input type="text" id="email" value={email}
-                        onChange={(e)=>setEmail(e.target.value)}/>
+                    <input type="text" id="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                 </div>
                 
-                <div>
+                {false && <div className={styles.actionsBox}>
                     <button>Cancel</button>
                     <button>Save</button>
-                </div>
+                </div>}
                 
                 
         

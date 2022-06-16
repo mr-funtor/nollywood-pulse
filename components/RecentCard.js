@@ -5,7 +5,8 @@ import Link from 'next/link';
 import {useRouter} from 'next/router';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faStar
+    faStar,
+    faDeleteLeft
 }from "@fortawesome/free-solid-svg-icons";
 
 //redux
@@ -110,9 +111,7 @@ function recentCards({movie,personal,watchId, setShowModal, settingDeleteId}){
                         <i className={`${rating>=5 ? styles.active : ''}`}><FontAwesomeIcon icon={faStar} /></i>
                         <p>{rating}</p>
                     </div>
-                    <button onClick={()=>callers()}
-                
->Give Rating/Review</button>
+                    <button onClick={()=>callers()}>Give Rating/Review</button>
                 </footer>
             </div>
         </article>

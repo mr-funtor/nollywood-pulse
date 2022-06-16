@@ -5,8 +5,6 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css'
 import heroPic from '../assets/images/40.png'
 import tempBlood from '../assets/images/blood.jpg'
-import RecentCard from '../components/RecentCard'
-import ReviewCard from '../components/ReviewCard';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserXmark,
@@ -14,6 +12,10 @@ import {
     faStar
 }from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
+
+//component
+import RecentCard from '../components/RecentCard'
+import ReviewCard from '../components/ReviewCard';
 import Loader from '../components/LoadingModal';
 
 //redux

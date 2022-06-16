@@ -184,3 +184,9 @@
     flex-wrap: wrap;
     margin-top: 38px;
 }
+
+@media (max-width:700px){
+    .cardsContainer{
+        justify-content: center;
+    }
+}

@@ -1,10 +1,14 @@
 import styles from '../../styles/PersonalReviews.module.css';
 import RecentCard from '../../components/RecentCard';
-import Modal from "../../components/Modal";
 import {useState, useEffect} from 'react';
 
+//components
+import Modal from "../../components/Modal";
+import Loader from '../../components/LoadingModal';
+
 //redux
-import {useSelector} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
+import {switcher} from '../../features/navState';
 
 //firebase
 import { collection, getDocs } from "firebase/firestore"; 
@@ -13,10 +17,13 @@ import {db} from '../../config/firebase.config';
 function allMoviesPage(){
     const [allmovies, setAllMovies]=useState([])
      const modalState= useSelector((state)=>state.modal)
-    
+    const dispatch=useDispatch()
     
      useEffect(()=>{
         const getMovies=async()=>{
+            
+            //this changes the color of the nav items in the side bar
+        dispatch(switcher('Explore'))
             
             try{
                 //gets movie data for the second sectionfrom firebase
@@ -39,7 +46,7 @@ function allMoviesPage(){
     },[]) 
     
      
-     
+     if(allmovies.length===0)return <Loader/>
     
     return(
         <section className={styles.pageContainer}>

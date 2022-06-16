@@ -8,8 +8,9 @@ import Loader from '../components/LoadingModal';
 import DeleteModal from '../components/DeleteModal';
 
 //redux
-import {useSelector} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
 import {switcher} from '../features/navState';
+
 
 //firebase
 import {collection, doc, addDoc,updateDoc,getDoc,query,getDocs,where,deleteDoc,onSnapshot } from "firebase/firestore"; 
@@ -21,9 +22,12 @@ function WatchListPage(){
     const router= useRouter();
     const loginState= useSelector((state)=>state.login);
     const [showModal, setShowModal]= useState(false);
-    const [pendingDeleteId, setPendingDeleteId]=useState('')
+    const [pendingDeleteId, setPendingDeleteId]=useState('');
+    const dispatch=useDispatch();
     
     useEffect(()=>{
+        //this changes the color of the nav items in the side bar
+        dispatch(switcher('watch'))
         
         //if the user is not logged in, the user is redirected to a signin page
         if(!loginState){

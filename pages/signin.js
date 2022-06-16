@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import styles from '../styles/signin.module.css';
 import {useRouter} from 'next/router'
 
@@ -6,13 +7,20 @@ import {getAuth, signInWithRedirect,onAuthStateChanged, GoogleAuthProvider,getRe
 import {auth} from '../config/firebase.config';
 
 //redux
-import { useSelector} from 'react-redux';
+import { useSelector,useDispatch} from 'react-redux';
+import {switcher} from '../features/navState';
 
 function signinPage(){
     const router= useRouter();
     const loginState= useSelector((state)=>state.login);
     
-    const provider= new GoogleAuthProvider
+    const provider= new GoogleAuthProvider;
+    const dispatch= useDispatch()
+    
+    useEffect(()=>{
+         //this changes the color of the nav items in the side bar
+        dispatch(switcher('Login'));
+    },[])
     
     //this takes the page they were previuosly on if they are already logged in
 //    if(loginState)return router.back();
