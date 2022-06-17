@@ -12,8 +12,8 @@ import {db,auth} from '../config/firebase.config';
 
 function Setting(){
     const user=auth.currentUser;
-    const [name, setName]=useState(user.providerData[0].displayName)
-    const [email, setEmail]=useState(user.providerData[0].email);
+    const [name, setName]=useState(user.providerData[0].displayName || '')
+    const [email, setEmail]=useState(user.providerData[0].email || '');
     const  dispatch= useDispatch();
     const router= useRouter();
     
