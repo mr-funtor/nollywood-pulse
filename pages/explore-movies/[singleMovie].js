@@ -3,14 +3,16 @@ import {useRouter} from 'next/router';
 import Image from 'next/image';
 import tempBlood from '../../assets/images/blood.jpg';
 import styles from '../../styles/SingleMovie.module.css';
-import ReviewCard from '../../components/ReviewCard';
-import Loader from '../../components/LoadingModal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserXmark,
     faCaretRight,
     faStar
 }from "@fortawesome/free-solid-svg-icons";
+
+//components
+import ReviewCard from '../../components/ReviewCard';
+import Loader from '../../components/LoadingModal';
 
 //redux
 import {useSelector,useDispatch} from 'react-redux';
@@ -35,11 +37,11 @@ function Movie(){
     }
     
         const showThePopUp=async()=>{
-        //check if the user is signed in
+        //checks if the user is signed in
             const user=auth.currentUser
         if(user===null)return dispatch(showing('Please sign in'));
         
-        //check if the movie has been saved by the user before
+        //checks if the movie has been saved by the user before
             const watchlistRef=collection(db, 'watchlist');
             const q= query(watchlistRef, where('userId','==',user.uid),where('id','==',movieData.id))
         const querySnapshot = await getDocs(q);
@@ -130,13 +132,24 @@ function Movie(){
             
             <section className={styles.movieBody}>
                 <div className={styles.movieBodyTop}>
-                    <h1>{movieData.title.toUpperCase()}</h1>
-                    <div className={styles.actionArea}>
-                        <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer"><button>Watch Trailer <i>&gt;</i></button></a>
-                        
-                        <b onClick={()=>callers()}>Give Review/Rating</b>
-                        
+                    <section className={styles.movieBodyName}>
+                        <h1>{movieData.title.toUpperCase()}</h1>
                         <i onClick={()=>showThePopUp()}>+</i>
+                    </section>
+                    
+                    
+                    
+                    <div className={styles.actionArea}>
+                        <div className={styles.actionAreaRight}>
+                            <b onClick={()=>callers()}>Give Review/Rating</b>
+                        
+                        
+                        <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer"><button>Watch Trailer <i></i></button></a>
+                        
+                        
+
+                            
+                        </div>
                     </div>
                     
                     <section className={styles.synopsis}>

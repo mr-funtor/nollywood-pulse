@@ -1,7 +1,7 @@
 .topSection{
     background: pink;
     position: relative;
-    height: 45vh;
+    height: 42vh;
 }
 
 .imageContainer{
@@ -25,6 +25,7 @@
     display: flex;
     justify-content: center;
     align-items:flex-end;
+    padding: 3vh 0;
 }
 
 .heroCover>div{
@@ -51,7 +52,7 @@
     margin-top: 15px;
 }
 
-
+/*BODY SECTION*/
 .movieBody{
 /*    background: pink;*/
     min-height: 100vh;
@@ -59,24 +60,65 @@
     color: #fff;
 }
 
-.movieBodyTop>h1{
+.movieBodyName{
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.movieBodyName>h1{
     font-size: 50px;
     margin-bottom: 20px;
 }
 
+.movieBodyName>i{
+    background: rgba(222,222,222,0.35);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.movieBodyName>i:hover{
+    background: rgba(222,222,222,0.6);
+}
+
 .actionArea{
     width:75%;
+/*
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+    background: pink;
+*/
 }
 
-.actionArea>a{
+.actionAreaRight{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+/*    background: pink;*/
+}
+
+.actionAreaRight>a{
     text-decoration: none;
 }
 
+.actionAreaRight>a>button{
+    background:none;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+}
 
+
+/*
 .actionArea>a>button{
     background: red;
     width: 180px;
@@ -92,31 +134,41 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
+*/
 
 .actionArea>a>button:hover{
     background-color: crimson;
 }
 
-.actionArea>b{
+.actionAreaRight{
+    width: 60%;
+/*    display: flex;*/
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actionAreaRight>b{
     cursor: pointer;
 }
 
-.actionArea>i{
-    background: rgba(222,222,222,0.35);
-    width: 40px;
-    height: 40px;
+.actionAreaRight>b{
+    background: rgba(222,222,222,0.5);
+    width: 220px;
+    height: 48px;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
     display: flex;
-    justify-content: center;
     align-items: center;
-    border: 1px solid #fff;
-    border-radius: 10px;
+    justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
 
-.actionArea>i:hover{
-    background: rgba(222,222,222,0.6);
-}
+
 
 .synopsis{
     margin: 50px 0;
@@ -135,6 +187,77 @@
 .reviewContainer>div{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between
+    justify-content: space-between;
+}
+
+@media (max-width:1000px){
+    .movieBody{
+        padding: 5vh 15.5vw;
+    }
+}
+
+@media (max-width:900px){
+    .topSection{
+        background: pink;
+        position: relative;
+        height: 30vh;
+    }
+
+    .heroCover i{
+        font-size: 30px;
+    }
+    
+    
+    .movieBody{
+        padding: 5vh 6.5vw;
+    }
+    
+    
+    .actionArea{
+        width:100%;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+    
+    .movieBodyName{
+        width:100%;
+/*        background: pink;*/
+    }
+    .movieBodyName>h1{
+        font-size: 30px;
+    }
+    
+/*
+    .actionArea>a>button{
+        display: block;
+        width: 150px;
+        height: 47px;
+        font-size: 15px;
+        font-weight: 700;
+        order: 3;
+    }
+*/
+    
+    .actionAreaRight{
+        width: 98%;
+/*
+        flex-direction: column;
+        align-items: flex-start;
+*/
+        justify-content: space-between;
+    }
+    
+    .actionAreaRight>b{
+        background: rgba(222,222,222,0.5);
+        width: 170px;
+        height: 47px;
+        font-size: 13.5px;
+        padding: 4px 10px;
+    }
+    
+    .reviewContainer>div{
+        justify-content: center;
+    }
+
 }
 
