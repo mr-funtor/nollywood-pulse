@@ -39,7 +39,13 @@ function RecentCards({movie,personal,watchId, setShowModal, settingDeleteId}){
     
     const showThePopUp=async()=>{
         //check if the user is signed in
-        if(user===null)return dispatch(showing('Please sign in'));
+        if(user===null){
+            
+            dispatch(showing('Please sign in'));
+            return setTimeout(()=>{
+                dispatch(notShowing());
+            },2000)
+        }
         
         //check if the movie has been saved by the user before
             const q= query(watchlistRef, where('userId','==',user.uid),where('id','==',id))

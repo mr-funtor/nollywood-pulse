@@ -115,6 +115,12 @@
     font-weight: bold;
     font-size: 16px;
     color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.actionAreaRight>a>button:hover{
+    color: lightgray;
 }
 
 
@@ -168,6 +174,10 @@
     transition: all 0.2s ease-in-out;
 }
 
+
+.actionAreaRight>b:hover{
+    background: rgba(222,222,222,0.4);
+}
 
 
 .synopsis{
