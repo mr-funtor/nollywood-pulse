@@ -25,7 +25,7 @@ function Dashboard(){
     
     const uploadMovieDetails=()=>{
         
-        // 'file' comes from the Blob or File API
+        // 'theImage' comes from the File API
     uploadBytes(imagesRef, theImage).then((snapshot) => {
       const theU=getDownloadURL(snapshot.ref).then((downloadURL) => {
       console.log('File available at', downloadURL);

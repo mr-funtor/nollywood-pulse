@@ -1,10 +1,17 @@
-.navbar{
+.navContainer{
     background: linear-gradient(to bottom,#000, rgba(0,0,0,0.6),#0000);
     position: fixed;
     top:0;
     left: 0;
     width:100%;
-    height: 12vh;
+    min-height: 12vh;
+    color:#fff;
+}
+
+.navbar{
+    
+    width:100%;
+    height: 11.5vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,7 +20,7 @@
 /*    opacity: 0.5;*/
     color: #fff;
 }
-
+ 
 .navbar>h3{
     cursor: pointer;
     
@@ -34,4 +41,36 @@
 .navbar>ul>li{
     list-style: none;
     cursor: pointer;
+}
+
+/*SEARCH AREA*/
+.searchBox{
+    width: 100%;
+    height: 9vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5vh 0;
+}
+
+.searchBox>input{
+    background: none;
+    width: 50%;
+    height: 100%;
+    border:1px solid lightgray;
+    border-radius: 5px;
+    padding: 0 10px;
+    color: #fff;
+    font-size: 15px;
+}
+
+.searchBox>input::-webkit-input-placeholder { /* Edge */
+  color: rgb(222,222,222);
+}
+
+.searchBox>i{
+    font-size: 17px;
+    margin-left: 25px;
+    cursor: pointer;
+    padding: 2px;
 }
