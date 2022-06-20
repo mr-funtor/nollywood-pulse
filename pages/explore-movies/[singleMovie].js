@@ -123,7 +123,7 @@ function Movie(){
                             <i className={movieData.rating >=4?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
                             <i className={movieData.rating >=5?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
                         </div>
-                        <p><span>{movieData.numberOfPeopleRating.toString() ||movieData.numberOfReviews.toString()} </span> review(s)</p>
+                        <p><span>{movieData.numberOfReviews.toString()} </span> review(s)</p>
                      </div>
                 </section>
         

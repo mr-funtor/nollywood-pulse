@@ -63,12 +63,13 @@
 .movieBodyName{
     display: flex;
     justify-content: space-between;
-    width: 75%;
+    width: 85%;
 }
 
 .movieBodyName>h1{
-    font-size: 50px;
+    font-size: 45px;
     margin-bottom: 20px;
+    width:90%;
 }
 
 .movieBodyName>i{
@@ -182,6 +183,11 @@
 
 .synopsis{
     margin: 50px 0;
+}
+
+.synopsis>p{
+    font-size: 18px;
+    line-height: 120%;
 }
 
 .synopsis>h1,

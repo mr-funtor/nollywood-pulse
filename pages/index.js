@@ -98,8 +98,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <p>{allmovies[0].description}
-          ndnlkn sndnl dnlfdnls</p>
+            <p>{allmovies[0].description}</p>
 
             <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer"><button>Watch Trailer <i>
             <FontAwesomeIcon icon={faCaretRight} />

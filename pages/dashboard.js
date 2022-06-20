@@ -11,7 +11,6 @@ import {showing, notShowing} from '../features/popUpState';
 //firebase
 import { getStorage, ref,uploadBytesResumable,getDownloadURL,uploadBytes } from "firebase/storage";
 import {storage} from '../config/firebase.config';
-const imagesRef = ref(storage, `${uuidv4()}`);
 import {db,auth} from '../config/firebase.config';
 import {collection, doc, addDoc,Timestamp,increment,updateDoc,getDoc,query,getDocs,where } from "firebase/firestore"; 
 
@@ -25,7 +24,7 @@ function Dashboard(){
     const dispatch=useDispatch();
     
     const uploadMovieDetails=()=>{
-        
+        const imagesRef = ref(storage, `${uuidv4()}`);
         // 'theImage' comes from the File API
     uploadBytes(imagesRef, theImage).then((snapshot) => {
       const theU=getDownloadURL(snapshot.ref).then((downloadURL) => {
