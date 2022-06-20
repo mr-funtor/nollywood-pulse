@@ -35,6 +35,7 @@
 
 .modal>div>h1 i{
     color:darkgrey;
+    cursor: pointer;
 }
 
 .modal>div>h1 i.active{

@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import styles from '../styles/Dashboard.module.css';
 
-function UpdateComponent({uploadMovieDetails,synopsis, setSynopsis,releaseYear, setReleaseYear,theImage,setTheImage,theMovieTitle, setTheMovieTitle}){
+function UpdateComponent({uploadMovieDetails,synopsis, setSynopsis,releaseYear, setReleaseYear,theImage,setTheImage,theMovieTitle, setTheMovieTitle,youtubeUrl,setYoutubeUrl}){
 //    const [theMovieTitle, setTheMovieTitle]=useState('');
 //    const [synopsis, setSynopsis]=useState('');
 //    const [releaseYear, setReleaseYear]= useState(0);
@@ -12,8 +12,7 @@ function UpdateComponent({uploadMovieDetails,synopsis, setSynopsis,releaseYear, 
     }
     
     return(
-    <form onSubmit={(e)=>{e.preventDefault(),uploadMovieDetails(theMovieTitle,synopsis,releaseYear,theImage)}
-        }>
+    <form onSubmit={(e)=>{e.preventDefault(),uploadMovieDetails()}}>
         <section>
             <div>
                 <label htmlFor="movie">Movie Title</label>
@@ -23,7 +22,6 @@ function UpdateComponent({uploadMovieDetails,synopsis, setSynopsis,releaseYear, 
             <div>
                 <label htmlFor="poster">Upload Poster Image</label>
                 <input id="poster" type="file" name="poster" accept="image/png, image/jpeg" 
-                
                 onChange={(e)=>takeHoldOfImage(e.target.files[0])}
         required/>
             </div>
@@ -34,6 +32,11 @@ function UpdateComponent({uploadMovieDetails,synopsis, setSynopsis,releaseYear, 
                     placeholder="write a brief summary of the movie"
                     value={synopsis} 
                     onChange={(e)=>setSynopsis(e.target.value)}></textarea>
+            </div>
+
+            <div>
+                <label htmlFor="youtube">YouTube Trailer Link</label>
+                <input id="youtube" type="text" value={youtubeUrl} onChange={(e)=>setYoutubeUrl(e.target.value)} required/>
             </div>
             
             <div>

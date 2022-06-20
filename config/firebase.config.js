@@ -1,10 +1,10 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp,getApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import {getAuth, signInWithRedirect,onAuthStateChanged, GoogleAuthProvider,signOut} from 'firebase/auth';
-import {getFirestore, collection, addDoc,getDocs, doc,updateDoc,Timestamp} from 'firebase/firestore';
-import { getStorage, ref } from "firebase/storage";
+import {getFirestore,collection, getDocs} from 'firebase/firestore';
+import { getStorage} from "firebase/storage";
 
 
 
@@ -21,62 +21,27 @@ databaseURL:process.env.NEXT_PUBLIC_DATABASEURL,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APPID
 };
 
+//console.log(process.env.NEXT_PUBLIC_FIREBASE_APIKEY)
+
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+function initializeAppIfNecessary() {
+  try {
+    return getApp();
+  } catch (any) {
+    return initializeApp(firebaseConfig);
+  }
+}
+
+const app = initializeAppIfNecessary();
 const auth= getAuth(app)
-export const db= getFirestore(app);
+const db= getFirestore(app);
 const provider= new GoogleAuthProvider();
 const storage = getStorage(app);
-
-const movRef=collection(db, 'movies')
-const movie={
-    title: 'Ade and Shola',
-    year: 2018,
-    rating:6,
-    totalratings:200,
-    numberOfPeopleRating:40,
-    description:"Love at a beautifull sight. The hut",
-    producer:"",
-    Director:"",
-    Cast:[],
-    image:"https://firebasestorage.googleapis.com/v0/b/web-coding-9a2b4.appspot.com/o/movies%2Fmoan?alt=media&token=591caedd-bf02-42f2-ac8f-3feabd15e866"
-}
-
-//const review={
-//    author:auth.currentUser,
-//    time:Timestamp.now(),
-//    text:"I have never watched it. I just wanted to see",
-//    rating:4,
-//    movie:0000,
-//}
-async function kiki(){
-    //SETTING
-  const hut= await addDoc(movRef,movie);
-//    console.log(hut.id)
-    
-    //READING
-//    const hut= await getDocs(movRef);
-//    console.log(hut.docs[0].data())
-//    console.log(hut.docs[0].id)
-//    console.log(hut.docs[0].name)
-    
-//    UPDATING
-//    const movieDoc= doc(movRef, 'Healer');
-//    const newField= {Year:2020};
-//    await updateDoc(movieDoc,newField)
-}
-//kiki()
-
-async function kaka(){
-    
-}
-
-
-
 
 
 
 export {
+db,
   auth,
     onAuthStateChanged,
     signOut,

@@ -21,6 +21,7 @@ function Dashboard(){
     const [synopsis, setSynopsis]=useState('');
     const [releaseYear, setReleaseYear]= useState(0);
     const [theImage,setTheImage]=useState(null);
+    const [youtubeUrl,setYoutubeUrl]=useState('');
     const dispatch=useDispatch();
     
     const uploadMovieDetails=()=>{
@@ -46,6 +47,7 @@ function Dashboard(){
     producer:"",
     Director:"",
     Cast:[],
+    youtubeUrl,
     image:downloadURL
         }
         
@@ -88,7 +90,8 @@ function Dashboard(){
                        theMovieTitle={theMovieTitle} setTheMovieTitle={setTheMovieTitle}
                        synopsis={synopsis} setSynopsis={setSynopsis}
                        releaseYear={releaseYear} setReleaseYear={setReleaseYear}
-                       theImage={theImage} setTheImage={setTheImage}
+                       theImage={theImage} setTheImage={setTheImage} youtubeUrl={youtubeUrl}
+                        setYoutubeUrl={setYoutubeUrl}
                        />}
         
          {!onPost && <input type="text" placeholder="search for the movie"/>}   
