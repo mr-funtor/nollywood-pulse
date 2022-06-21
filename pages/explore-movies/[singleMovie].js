@@ -33,27 +33,33 @@ function Movie(){
     
     
     const callers=()=>{
-        dispatch(openModal()); dispatch(fillMovieId({id:movieData.id,title:movieData.title}))
+        dispatch(openModal()); //this opens the modal that opens the modal for giving a review
+        dispatch(fillMovieId({id:movieData.id,title:movieData.title}))//thsi gives the state details of the movie to know if the user has reviewed the movie before
     }
     
-        const showThePopUp=async()=>{
+    const showThePopUp=async()=>{
         //checks if the user is signed in
-            const user=auth.currentUser
+        const user=auth.currentUser
         if(user===null)return dispatch(showing('Please sign in'));
         
         //checks if the movie has been saved by the user before
+        try{
             const watchlistRef=collection(db, 'watchlist');
             const q= query(watchlistRef, where('userId','==',user.uid),where('id','==',movieData.id))
-        const querySnapshot = await getDocs(q);
-            
-        if(querySnapshot?.docs[0]?.data()){
-            dispatch(showing('Movie already in watchlist'));
-            return setTimeout(()=>{
-            dispatch(notShowing());
-        },2000)
+            const querySnapshot = await getDocs(q);
+
+            if(querySnapshot?.docs[0]?.data()){
+                dispatch(showing('Movie already in watchlist'));
+                    return setTimeout(()=>{
+                    dispatch(notShowing());
+                },2000)
+            }
+        }catch(e){
+            console.log(e)
         }
         
-           //save movie into database
+        
+        //save movie into database
         const watchDetails={
             userId:user.uid,
             id:movieData.id,
@@ -61,14 +67,20 @@ function Movie(){
             title:movieData.title,
             rating:movieData.rating
         }
+               
+        try{
+            const docRef= await addDoc(watchlistRef, watchDetails)
         
-        const docRef= await addDoc(watchlistRef, watchDetails)
+            dispatch(showing('Movie added to watchlist'));
+
+            setTimeout(()=>{
+                dispatch(notShowing());
+            },2000)   
+        }catch(e){
+              console.log(e)  
+        }
         
-        dispatch(showing('Movie added to watchlist'));
         
-        setTimeout(()=>{
-            dispatch(notShowing());
-        },2000)
     }
     
     
@@ -105,6 +117,8 @@ function Movie(){
 //        console.log(movieData)
     },[router.query.singleMovie])
     
+    
+    //shows the loading screen when movies and reviews are being fetched
     if(movieData===null || reviewsData===null)return <Loader/>
     
     return(
@@ -144,11 +158,9 @@ function Movie(){
                             <b onClick={()=>callers()}>Give Review/Rating</b>
                         
                         
-                        <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer"><button>Watch Trailer <i></i></button></a>
-                        
-                        
-
-                            
+                            <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer">
+                                <button>Watch Trailer <i></i></button>
+                            </a>  
                         </div>
                     </div>
                     

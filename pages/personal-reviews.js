@@ -1,7 +1,10 @@
 import {useState,useEffect} from 'react';
 import styles from '../styles/PersonalReviews.module.css';
-import ReviewCard from '../components/ReviewCard';
 import {useRouter} from 'next/router';
+
+
+//components
+import ReviewCard from '../components/ReviewCard';
 import Loader from '../components/LoadingModal';
 
 //redux

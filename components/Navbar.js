@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 import styles from '../styles/Navbar.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,15 +22,16 @@ function Navbar(){
     const [isSearchOpen, setIsSearchOpen]=useState(false);
     const [searchText, setSearchText]=useState('')
     const dispatch= useDispatch();
+    const router= useRouter();
     
     const searchForMovie=async(e)=>{
         if(e.key==='Enter'){
             if(searchText.length===0)return //stops the code since the user typed nothing
             
-           let newText = searchText.replaceAll(/[<*>]/g,"")//this would make the users input safer preventing an injection
+            let newText = searchText.replaceAll(/[<*>]/g,"");//this would make the users input safer preventing an injection
             
-           const movRef = collection(db, "movies");
-//           const q= query(movRef, where() )
+            router.push(`/search/${searchText}`); //takes the user to the search page
+            setIsSearchOpen(false)//closes the search bar
         }
     }
     

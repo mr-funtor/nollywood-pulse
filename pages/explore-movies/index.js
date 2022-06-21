@@ -1,10 +1,10 @@
 import styles from '../../styles/PersonalReviews.module.css';
-import RecentCard from '../../components/RecentCard';
 import {useState, useEffect} from 'react';
 
 //components
 import Modal from "../../components/Modal";
 import Loader from '../../components/LoadingModal';
+import RecentCard from '../../components/RecentCard';
 
 //redux
 import {useSelector,useDispatch} from 'react-redux';
@@ -57,11 +57,9 @@ function AllMoviesPage(){
                 <div className={styles.reviewsContainer}>
                     {
                 allmovies.map((movie)=>{
-
                     return <RecentCard key={movie.id} movie={movie}/>
-          })
-      }
-                   
+                  })
+              }
                 </div>
                 
             </section>

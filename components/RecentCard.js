@@ -85,6 +85,7 @@ function RecentCards({movie,personal,watchId, setShowModal, settingDeleteId}){
         }
     }
     
+    //open the modal that shows the delete warning
     const openModalAndSetId=()=>{
         setShowModal(true);
         settingDeleteId(watchId)
