@@ -11,3 +11,11 @@
     align-items: center;
     color:#fff;
 }
+
+@media (max-width:700px){
+    .container{
+        bottom: 50px;
+        left:0px;
+        transform: translateX(45%);
+    }
+}

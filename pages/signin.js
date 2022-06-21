@@ -1,6 +1,8 @@
 import {useEffect} from 'react';
 import styles from '../styles/signin.module.css';
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/router';
+import Image from 'next/image';
+import GoogleLogo from '../assets/images/googlelogo.png'
 
 //firebase
 import {getAuth, signInWithRedirect,onAuthStateChanged, GoogleAuthProvider,getRedirectResult,signInWithPopup} from 'firebase/auth';
@@ -51,7 +53,11 @@ function SigninPage(){
     
     return(
         <section className={styles.siginContainer}>
-            <button onClick={()=>siginUser()}>Sign In With Google</button>
+            <button onClick={()=>siginUser()}>
+                <div className={styles.imageContainer}>
+                    <Image className={styles.theImage}  src={GoogleLogo} alt="the google logo" layout="fill"/>
+                </div>
+            Sign In With Google</button>
         
         </section>
     

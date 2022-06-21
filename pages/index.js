@@ -100,9 +100,12 @@ export default function Home() {
 
             <p>{allmovies[0].description}</p>
 
-            <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer"><button>Watch Trailer <i>
-            <FontAwesomeIcon icon={faCaretRight} />
-      </i></button></a>
+            <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer">
+                Watch Trailer <i>
+                    <FontAwesomeIcon icon={faCaretRight} />
+              </i>
+                
+            </a>
         </div>
       
         <div className={styles.floater}>
@@ -128,9 +131,9 @@ export default function Home() {
             {
             allmovies.map((movie)=>{
       
-            return <RecentCard key={movie.id} movie={movie}/>
-  })
-      }
+                return <RecentCard key={movie.id} movie={movie}/>
+              })
+            }
                 
             </div>
         </section>
