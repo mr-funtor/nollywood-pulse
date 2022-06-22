@@ -158,7 +158,7 @@ function Movie(){
                             <b onClick={()=>callers()}>Give Review/Rating</b>
                         
                         
-                            <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer">
+                            <a href={movieData.youtubeUrl} target="_blank" rel="noreferrer">
                                 <button>Watch Trailer <i></i></button>
                             </a>  
                         </div>

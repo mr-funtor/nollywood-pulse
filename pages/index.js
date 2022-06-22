@@ -77,48 +77,50 @@ export default function Home() {
     if(allmovies.length===0)return <Loader/>
     
   return (
-    <section className={styles.heroSection}>
-      
-      
-      <div className={styles.imageContainer}>
-        <Image className={styles.theImage}  src={allmovies[0].image} alt="a picture for the movie" layout="fill"/>
-      </div>
-      
-      <section className={styles.heroCover}>
-        <div className={styles.heroCoverBox}>
-            <div className={styles.coverTop}>
-                <h1>{allmovies[0].title}</h1>
-                <div>
-                    <i className={allmovies[0].rating >=1?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                    <i className={allmovies[0].rating >=2?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                    <i className={allmovies[0].rating >=3?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                    <i className={allmovies[0].rating >=4?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                    <i className={allmovies[0].rating >=5?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                    <p><span>{allmovies[0].rating}</span>/5</p>
+    <main>
+
+        <section className={styles.heroSection}>
+          <div className={styles.imageContainer}>
+            <Image className={styles.theImage}  src={allmovies[0].image} alt="a picture for the movie" layout="fill"/>
+          </div>
+
+          <section className={styles.heroCover}>
+            <div className={styles.heroCoverBox}>
+                <div className={styles.coverTop}>
+                    <h1>{allmovies[0].title}</h1>
+                    <div>
+                        <i className={allmovies[0].rating >=1?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={allmovies[0].rating >=2?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={allmovies[0].rating >=3?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={allmovies[0].rating >=4?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={allmovies[0].rating >=5?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        <p><span>{allmovies[0].rating}</span>/5</p>
+                    </div>
                 </div>
+
+                <p>{allmovies[0].description}</p>
+
+                <a href={allmovies[0].youtubeUrl} target="_blank" rel="noreferrer">
+                    <button>
+                    Watch Trailer <i>
+                        <FontAwesomeIcon icon={faCaretRight} />
+                  </i>
+                    </button>
+                </a>
             </div>
 
-            <p>{allmovies[0].description}</p>
+            <div className={styles.floater}>
+                <ul>
+                    <li className={styles.active}></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
 
-            <a href="https://www.youtube.com/watch?v=r9sSydb5ec8" target="_blank" rel="noreferrer">
-                Watch Trailer <i>
-                    <FontAwesomeIcon icon={faCaretRight} />
-              </i>
-                
-            </a>
-        </div>
-      
-        <div className={styles.floater}>
-            <ul>
-                <li className={styles.active}></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-      
-        </div>
-      </section>
-      
+            </div>
+          </section>
+        </section>
+            
       <section className={styles.secondSection}>
       
         <section className={styles.recentContainer}>
@@ -158,6 +160,6 @@ export default function Home() {
       
       </section>
       
-    </section>
+    </main>
   )
 }

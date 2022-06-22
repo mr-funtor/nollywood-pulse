@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
+import {useRouter} from 'next/router';
 import styles from '../styles/Dashboard.module.css';
 import UpdateArea from '../components/UpdateArea';
 import { v4 as uuidv4 } from 'uuid';
@@ -22,6 +23,7 @@ function Dashboard(){
     const [theImage,setTheImage]=useState(null);
     const [youtubeUrl,setYoutubeUrl]=useState('');
     const dispatch=useDispatch();
+    const router= useRouter();
     
     const uploadMovieDetails=()=>{
         const imagesRef = ref(storage, `${uuidv4()}`);
@@ -69,7 +71,9 @@ function Dashboard(){
         
     }
         
-        
+    useEffect(()=>{
+        return router.push('/');
+    })  
         
        
     
