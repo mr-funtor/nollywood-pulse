@@ -12,6 +12,7 @@ import {
     faStar
 }from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
+import useSWR from 'swr'
 
 //component
 import RecentCard from '../components/RecentCard'
@@ -28,20 +29,8 @@ import {switcher} from '../features/navState';
 import { collection, getDocs,query,limit } from "firebase/firestore"; 
 import {db} from '../config/firebase.config';
 
-export default function Home() {
-    const [allmovies, setAllMovies]=useState([])
-    const [allreviews, setAllReviews]=useState([])
-    const dispatch= useDispatch();
-    const modalState= useSelector((state)=>state.modal)
-    
-    
 
-    useEffect(()=>{
-        //this changes the color of the nav items in the side bar
-        dispatch(switcher('Home'))
-        
-        
-        const getMovies=async()=>{
+const getMovies=async()=>{
             
             try{
                 //gets movie data for the second sectionfrom firebase
@@ -61,46 +50,63 @@ export default function Home() {
               return  {id:doc.id,...doc.data()}
             })
             
-        setAllMovies(moviesData)   
-        setAllReviews(reviewsData)   
+            
+            return [moviesData,reviewsData]
+   
                 
             }catch(error){
                 console.log(error)
             }
         
         }
-
-        getMovies()
-        
-    },[allmovies,dispatch]) 
+console.log('can')
+export default function Home() {
+    const [inMount,setInMount]=useState(false)
+    const{data, error}=useSWR('indexPage',getMovies);
     
-    if(allmovies.length===0)return <Loader/>
+//    const [allmovies, setAllMovies]=useState(data[0])
+//    const [allreviews, setAllReviews]=useState(data[1])
+    const dispatch= useDispatch();
+    const modalState= useSelector((state)=>state.modal)
+    
+    
+//    const [allmovies, allreviews]=data;
+
+    useEffect(()=>{
+        //this changes the color of the nav items in the side bar
+        dispatch(switcher('Home'))
+//        setAllMovies(d)
+    },[dispatch]) 
+    
+    
+   if(!data)return <Loader/>
+//    return console.log(data)
     
   return (
     <main>
 
         <section className={styles.heroSection}>
           <div className={styles.imageContainer}>
-            <Image className={styles.theImage}  src={allmovies[0].image} alt="a picture for the movie" layout="fill"/>
+            <Image className={styles.theImage}  src={data[0][0].image} alt="a picture for the movie" layout="fill"/>
           </div>
 
           <section className={styles.heroCover}>
             <div className={styles.heroCoverBox}>
                 <div className={styles.coverTop}>
-                    <h1>{allmovies[0].title}</h1>
+                    <h1>{data[0][0].title}</h1>
                     <div>
-                        <i className={allmovies[0].rating >=1?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                        <i className={allmovies[0].rating >=2?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                        <i className={allmovies[0].rating >=3?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                        <i className={allmovies[0].rating >=4?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                        <i className={allmovies[0].rating >=5?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
-                        <p><span>{allmovies[0].rating}</span>/5</p>
+                        <i className={data[0][0].rating >=1?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={data[0][0].rating >=2?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={data[0][0].rating >=3?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={data[0][0].rating >=4?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        <i className={data[0][0].rating >=5?styles.active :''}><FontAwesomeIcon icon={faStar} /></i>
+                        <p><span>{data[0][0].rating}</span>/5</p>
                     </div>
                 </div>
 
-                <p>{allmovies[0].description}</p>
+                <p>{data[0][0].description}</p>
 
-                <a href={allmovies[0].youtubeUrl} target="_blank" rel="noreferrer">
+                <a href={data[0][0].youtubeUrl} target="_blank" rel="noreferrer">
                     <button>
                     Watch Trailer <i>
                         <FontAwesomeIcon icon={faCaretRight} />
@@ -131,7 +137,7 @@ export default function Home() {
             
             <div className={styles.cardsContainer}>
             {
-            allmovies.map((movie)=>{
+            data[0].map((movie)=>{
       
                 return <RecentCard key={movie.id} movie={movie}/>
               })
@@ -148,7 +154,7 @@ export default function Home() {
             
             <div className={styles.cardsContainer}>
                 {
-                allreviews.map((review)=>{
+                data[1].map((review)=>{
                 return <ReviewCard key={review.id} review={review} />
                 
             })

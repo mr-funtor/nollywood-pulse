@@ -8,6 +8,7 @@ import {
     faStar,
     faEllipsisV
 }from "@fortawesome/free-solid-svg-icons";
+import useSWR from 'swr'
 
 //components
 import Loader from '../../components/LoadingModal';
@@ -23,24 +24,25 @@ import { collection, doc, getDoc,deleteDoc } from "firebase/firestore";
 import {db,auth} from '../../config/firebase.config';
 
 
+
 function SingleReview(){
-    const [movieReview,setMovieReview]=useState(null);
+//    const [movieReview,setMovieReview]=useState(null);
     const [seeOptions, setSeeOptions]=useState(false);
     const [showModal, setShowModal]= useState(false);
     const router=useRouter();
     const dispatch= useDispatch();
     
-    
-    useEffect(()=>{
-        const fetchMovie=async()=>{
+    //fetch data from database to be cached
+    const fetchMovie=async()=>{
             const singleReview= router.query.singleReview;
             const docRef = doc(db, "reviews", singleReview);
            const docSnap = await getDoc(docRef); 
-            setMovieReview({id:docSnap.id,...docSnap.data()})
-        
+    
+            return {id:docSnap.id,...docSnap.data()}
         }
-        fetchMovie()
-        },[router.query.singleReview])
+    const{data, error}=useSWR('singleMovie',fetchMovie);
+    let movieReview;
+    
     
     //this closes the options popup when you click on the body of the screen
     const dismissTheOptions=(e)=>{
@@ -62,7 +64,9 @@ function SingleReview(){
         }
     }
     
-    if(movieReview===null)return <Loader/>
+    if(error)return console.log(error)
+    if(!data)return <Loader/>
+    if(data) movieReview=data;
     
     return(
     <section onClick={(e)=>dismissTheOptions(e)}className={styles.reviewContainer}>

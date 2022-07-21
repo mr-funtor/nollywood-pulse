@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import styles from '../../styles/PersonalReviews.module.css';
+import useSWR from 'swr'
 
 //components
 import ReviewCard from '../../components/ReviewCard';
@@ -15,14 +16,12 @@ import {db} from '../../config/firebase.config';
 
 
 function AllReviewsPage(){
-    const [allreviews, setAllReviews]=useState([]);
+//    const [allreviews, setAllReviews]=useState([]);
     const dispatch= useDispatch();
     
-    useEffect(()=>{
-        //this changes the color of the nav items in the side bar
-        dispatch(switcher('Reviews'))
-        
-        const getMovies=async()=>{
+    
+    //fetch the data and cache it
+    const getMovies=async()=>{
             
             try{
             
@@ -34,19 +33,25 @@ function AllReviewsPage(){
               return  {id:doc.id,...doc.data()}
             })
          
-        setAllReviews(reviewsData)   
+    
+            return reviewsData
                 
             }catch(error){
                 console.log(error)
             }
         
         }
-
-        getMovies()
+    const{data, error}=useSWR('allReviews',getMovies);
+    let allreviews;
+    
+    useEffect(()=>{
+        //this changes the color of the nav items in the side bar
+        dispatch(switcher('Reviews'))
         
     },[dispatch]) 
     
-    if(allreviews===null)return <Loader/>
+    if(!data)return <Loader/>
+    if(data) allreviews=data;
         
         
     return(
