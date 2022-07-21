@@ -9,7 +9,6 @@ import {
     faCaretRight,
     faStar
 }from "@fortawesome/free-solid-svg-icons";
-import useSWR from 'swr'
 
 //components
 import ReviewCard from '../../components/ReviewCard';
@@ -27,42 +26,45 @@ import { collection, doc, getDoc,addDoc,query,getDocs,where } from "firebase/fir
 import {auth,db} from '../../config/firebase.config';
 
 function Movie(){
-//    const [movieData,setMovieData]=useState(null);
-//    const [reviewsData,setReviewsData]=useState(null);
+    const [movieData,setMovieData]=useState(null);
+    const [reviewsData,setReviewsData]=useState(null);
      const dispatch =useDispatch();
     const router=useRouter();
     
     
-      const fetchMovie=async()=>{
-            
+        useEffect(()=>{
+        const fetchMovie=async()=>{
+
             try{
                 //fetch the data for the single movie
                const singleMovie= router.query.singleMovie;
             const docRef = doc(db, "movies", singleMovie);
            const docSnap = await getDoc(docRef); 
-                
+
                 //fetch the reviews for this movie
                 const reviewsRef= collection(db,"reviews");
-                
+
                 const q = query(reviewsRef, where("movieId", "==", `${singleMovie}`));
-                
+
                 const data= await getDocs(q)
 //                console.log(data.docs[0].data())
                 const movieReviews=data.docs.map((doc)=>{
                     return{id:doc.id,...doc.data()}
                 })
-                
-//            setMovieData() 
-//            setReviewsData(movieReviews)
-                return [{...docSnap.data(),id:docSnap.id},movieReviews]
+
+            setMovieData({...docSnap.data(),id:docSnap.id}) 
+            setReviewsData(movieReviews)
 //                console.log(movieReviews)
             }catch(error){
                 console.log(error)
             }
-            
+
         }
-    const{data, error}=useSWR('singleMovie',fetchMovie);
-    const [movieData,reviewsData]=data;
+
+        fetchMovie()
+//        console.log(movieData)
+    },[router.query.singleMovie])
+
     
     const callers=()=>{
         dispatch(openModal()); //this opens the modal that opens the modal for giving a review
@@ -119,8 +121,7 @@ function Movie(){
     
     
     //shows the loading screen when movies and reviews are being fetched
-    if(!data)return <Loader/>
-        return console.log(movieData);
+    if(movieData===null || reviewsData===null)return <Loader/>
     
     return(
         <main>
