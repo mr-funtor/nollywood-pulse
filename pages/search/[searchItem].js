@@ -44,7 +44,7 @@ function SearchPage(){
         }
         
         searchForMovie()
-    },[])
+    },[router.query.searchItem])
     
     
     //shows the loading screen when movies and reviews are being fetched
